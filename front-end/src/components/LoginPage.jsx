@@ -61,6 +61,9 @@ function LoginPage() {
           </p>
         ) : null}
       </form>
+      <p>
+        zebirita@email.com, $#zebirita#$
+      </p>
     </div>
   );
 }

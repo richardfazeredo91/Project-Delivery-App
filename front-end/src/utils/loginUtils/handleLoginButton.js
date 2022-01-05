@@ -1,14 +1,14 @@
 import loginAttempt from '../../server/loginAttempt';
 
-const handleLoginButton = async (e, login, password) => {
+const handleLoginButton = async (e, email, password) => {
   e.preventDefault();
-  const response = await loginAttempt(login, password);
-  const successApiReturn = 200;
-  if (response.status === successApiReturn) {
+  const response = await loginAttempt(email, password);
+  if (response) {
     window.location.href = '/TELA DE LOGADO';
   } else {
     return true;
   }
+  return false;
 };
 
 export default handleLoginButton;
