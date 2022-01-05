@@ -3,7 +3,7 @@ const SalesProduct = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
   },
   {
-    timeStamps: true,
+    timestamps: true,
     underscored: true,
   });
 
