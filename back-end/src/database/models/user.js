@@ -6,15 +6,15 @@ const User = (sequelize, DataTypes) => {
     role: DataTypes.STRING,
   },
   {
-    timeStamps: false,
-    underscored: true,
+    timestamps: false,
+    tableName: 'users',
   });
 
   User.associate = (models) => {
     User.belongsTo(models.Sale,
       { foreignKey: 'id', as: 'user_id' });
-      User.belongsTo(models.Sale,
-        { foreignKey: 'id', as: 'seller_id' });
+    User.belongsTo(models.Sale,
+      { foreignKey: 'id', as: 'seller_id' });
   }
 
   return User;

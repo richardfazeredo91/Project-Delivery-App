@@ -8,7 +8,7 @@ const Sale = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
   },
   {
-    timeStamps: true,
+    timestamps: true,
     updatedAt: false,
     underscored: true,
   });
