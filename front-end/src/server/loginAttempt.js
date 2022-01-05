@@ -1,5 +1,5 @@
 const loginAttempt = (login, password) => {
-  fetch('ENDPOINT POST QUE VERIFICA LOGIN', {
+  fetch('http://localhost:3001/user/login ', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

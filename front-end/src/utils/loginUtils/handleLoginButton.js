@@ -1,4 +1,4 @@
-import loginAttempt from '../server/loginAttempt';
+import loginAttempt from '../../server/loginAttempt';
 
 const handleLoginButton = async (e, login, password) => {
   e.preventDefault();

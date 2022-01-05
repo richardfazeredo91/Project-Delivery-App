@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useAppContext } from '../context/AppContext';
-import validateLoginInfo from '../utils/validateLoginInfo';
-import handleLoginButton from '../utils/handleLoginButton';
+import validateLoginInfo from '../utils/loginUtils/validateLoginInfo';
+import handleLoginButton from '../utils/loginUtils/handleLoginButton';
 
 function LoginPage() {
   const [login, setlogin] = useState('');
