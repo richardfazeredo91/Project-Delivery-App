@@ -1,22 +1,22 @@
-export const loginAttempt = (login, password) => {
-  fetch('ENDPOINT POST QUE VERIFICA LOGIN', {
+const loginAttempt = async (email, password) => {
+  const loginData = fetch('http://localhost:3001/user/login ', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        login,
-        password,
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', data.user);
-        return true;
-      }
-      return false;
-    }
-  );
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user);
+      return data;
+    });
+  return loginData;
 };
+
+export default loginAttempt;

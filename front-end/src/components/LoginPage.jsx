@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useAppContext } from '../context/AppContext';
-import validateLoginInfo from '../utils/validateLoginInfo';
-import { handleLoginButton } from '../utils/handleLoginButton';
+import validateLoginInfo from '../utils/loginUtils/validateLoginInfo';
+import handleLoginButton from '../utils/loginUtils/handleLoginButton';
 
 function LoginPage() {
   const [login, setlogin] = useState('');
@@ -44,7 +44,7 @@ function LoginPage() {
             type="submit"
             data-testid="common_login__input-button-login"
             disabled={ !enableButton }
-            onClick={ (e) => handleLoginButton(e, login, password) }
+            onClick={ (e) => setloginError(handleLoginButton(e, login, password)) }
           >
             Login
           </button>
@@ -55,8 +55,15 @@ function LoginPage() {
             Ainda não tenho conta
           </button>
         </div>
-        {loginError ? <p>Login ou senha inválidos</p> : null}
+        {loginError ? (
+          <p data-testid="common_login__element-invalid-email">
+            Login ou senha inválidos
+          </p>
+        ) : null}
       </form>
+      <p>
+        zebirita@email.com, $#zebirita#$
+      </p>
     </div>
   );
 }
