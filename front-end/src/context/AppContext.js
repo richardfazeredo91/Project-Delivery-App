@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MyContext = React.createContext();
 
 function AppContext({ children }) {
-  const [user, setUser] = useState('LimaLima');
+  const [user, setUser] = useState({ email: '' });
 
   const contextValue = {
     user,
