@@ -9,11 +9,25 @@ const validateUser = (req, res, next) => {
     password: joi.string().min(6).required(),
   }).validate(body);
 
-  if (error) return res.status(400).json({ message: error.details[0].message });
+  if (error) throw Error('INVALID_FIELDS');
+
+  return next();
+};
+
+const validateLogin = (req, res, next) => {
+  const { body } = req;
+
+  const { error } = joi.object({
+    email: joi.string().email().required(),
+    password: joi.string().min(6).required(),
+  }).validate(body);
+
+  if (error) throw Error('INVALID_FIELDS');
 
   return next();
 };
 
 module.exports = {
   validateUser,
-}
+  validateLogin,
+};

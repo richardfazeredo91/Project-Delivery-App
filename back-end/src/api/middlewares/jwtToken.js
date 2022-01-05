@@ -31,4 +31,4 @@ const authenticateToken = (req, _res, next) => {
 module.exports = {
   generateToken,
   authenticateToken,
-}
+};
