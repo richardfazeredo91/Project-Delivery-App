@@ -1,11 +1,11 @@
 const validateLoginInfo = (name, login, password) => {
   const patternLogin = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const maxPasswordLength = 5;
-  const maxNameLength = 11;
+  const minPasswordLength = 6;
+  const minNameLength = 12;
   if (
-    password.length <= maxPasswordLength
+    password.length >= minPasswordLength
     && patternLogin.test(login)
-    && name.length <= maxNameLength
+    && name.length >= minNameLength
   ) {
     return true;
   }

@@ -7,7 +7,7 @@ function RegisterPage() {
   const [login, setlogin] = useState('');
   const [password, setpassword] = useState('');
   const [enableButton, setenableButton] = useState(false);
-  const [loginError, setloginError] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     setenableButton(validateRegisterInfo(name, login, password));
@@ -24,7 +24,7 @@ function RegisterPage() {
               name="name"
               id="name"
               data-testid="common_register__input-name"
-              maxLength="11"
+              minLength="12"
               onChange={ (e) => setname(e.target.value) }
             />
           </label>
@@ -46,7 +46,7 @@ function RegisterPage() {
               name="password"
               id="password"
               data-testid="common_register__input-password"
-              maxLength="5"
+              minLength="6"
               onChange={ (e) => setpassword(e.target.value) }
             />
           </label>
@@ -56,13 +56,13 @@ function RegisterPage() {
             data-testid="common_login__button-login"
             disabled={ !enableButton }
             onClick={
-              (e) => setloginError(handleRegisterButton(e, name, login, password))
+              async (e) => setError(await handleRegisterButton(e, name, login, password))
             }
           >
             Cadastrar
           </button>
         </div>
-        {!loginError ? (
+        {!error ? (
           <p data-testid="common_register__element-invalid_register">
             Nome/Email ou senha inválidos
           </p>
