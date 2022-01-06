@@ -15,7 +15,7 @@ const CardItem = () => {
           type="button"
           data-testid="customer_products__button-card-rm-item-"
         >
-          -
+          --
         </button>
         <p data-testid="customer_products__input-card-quantity-">0</p>
         <button
