@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRoute);
-app.use('/sale', saleRoute)
+app.use('/sale', saleRoute);
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use(error);

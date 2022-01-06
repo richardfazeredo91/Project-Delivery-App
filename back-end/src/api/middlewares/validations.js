@@ -44,7 +44,7 @@ const validateNewSale = (req, _res, next) => {
 
   }).validate(body);
 
-  if (error) return res.status(400).json({ message: error.details[0].message });
+  if (error) throw Error('INVALID_FIELDS');
 
   return next();
 };

@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 const config = require('../../database/config/config');
 
-const saleService = require('../services/saleService')
+const saleService = require('../services/saleService');
 
 const sequelize = new Sequelize(config.development);
 
-const createSale = async(req, res, next) => {
+const createSale = async (req, res, next) => {
   const t = await sequelize.transaction();
-  try{
+  try {
     const { body, user } = req;
 
     const sale = await saleService.createSale(body, user, t);
@@ -15,7 +15,7 @@ const createSale = async(req, res, next) => {
     await t.commit();
     
     res.status(201).json(sale);
-  }catch(error){
+  } catch (error) {
     await t.rollback();
     console.log(error);
     next(error);
@@ -24,4 +24,4 @@ const createSale = async(req, res, next) => {
 
 module.exports = {
   createSale,
-}
+};
