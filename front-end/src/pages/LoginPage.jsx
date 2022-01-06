@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useAppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 import validateLoginInfo from '../utils/loginUtils/validateLoginInfo';
 import handleLoginButton from '../utils/loginUtils/handleLoginButton';
 
@@ -48,12 +48,11 @@ function LoginPage() {
           >
             Login
           </button>
-          <button
-            type="button"
-            data-testid="common_login__button-register"
-          >
-            Ainda não tenho conta
-          </button>
+          <Link to="/register">
+            <button type="button" data-testid="common_login__button-register">
+              Ainda não tenho conta
+            </button>
+          </Link>
         </div>
         {!loginError ? (
           <p data-testid="common_login__element-invalid-email">
@@ -61,9 +60,7 @@ function LoginPage() {
           </p>
         ) : null}
       </form>
-      <p>
-        zebirita@email.com, $#zebirita#$
-      </p>
+      <p>zebirita@email.com, $#zebirita#$</p>
     </div>
   );
 }
