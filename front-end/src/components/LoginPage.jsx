@@ -42,7 +42,7 @@ function LoginPage() {
 
           <button
             type="submit"
-            data-testid="common_login__input-button-login"
+            data-testid="common_login__button-login"
             disabled={ !enableButton }
             onClick={ (e) => setloginError(handleLoginButton(e, login, password)) }
           >
@@ -50,7 +50,7 @@ function LoginPage() {
           </button>
           <button
             type="button"
-            data-testid="common_login__input-button-register"
+            data-testid="common_login__button-register"
           >
             Ainda não tenho conta
           </button>
