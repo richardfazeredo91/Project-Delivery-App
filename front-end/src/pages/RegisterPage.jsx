@@ -53,7 +53,7 @@ function RegisterPage() {
 
           <button
             type="submit"
-            data-testid="common_login__button-login"
+            data-testid="common_register__button-register"
             disabled={ !enableButton }
             onClick={
               async (e) => setError(await handleRegisterButton(e, name, login, password))
