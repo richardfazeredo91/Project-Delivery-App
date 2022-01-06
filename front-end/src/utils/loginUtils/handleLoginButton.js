@@ -6,9 +6,9 @@ const handleLoginButton = async (e, email, password) => {
   if (response.token) {
     window.location.href = '/customer/products';
   } else {
-    return true;
+    return false;
   }
-  return false;
+  return true;
 };
 
 export default handleLoginButton;

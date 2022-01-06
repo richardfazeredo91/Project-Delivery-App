@@ -7,7 +7,7 @@ function LoginPage() {
   const [login, setlogin] = useState('');
   const [password, setpassword] = useState('');
   const [enableButton, setenableButton] = useState(false);
-  const [loginError, setloginError] = useState(false);
+  const [loginError, setloginError] = useState(true);
 
   useEffect(() => {
     setenableButton(validateLoginInfo(login, password));
@@ -55,7 +55,7 @@ function LoginPage() {
             Ainda não tenho conta
           </button>
         </div>
-        {loginError ? (
+        {!loginError ? (
           <p data-testid="common_login__element-invalid-email">
             Login ou senha inválidos
           </p>
