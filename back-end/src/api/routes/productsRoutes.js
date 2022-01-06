@@ -1,7 +1,6 @@
 const productRoute = require('express').Router();
 const { getAll } = require('../controllers/productController');
-const { authenticateToken } = require('../middlewares/jwtToken');
 
-productRoute.get('/listall', authenticateToken, getAll)
+productRoute.get('/listall', getAll);
 
 module.exports = productRoute;
