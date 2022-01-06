@@ -48,10 +48,11 @@ module.exports = {
         field: 'delivery_number',
         allowNull: false,
       },
-      createdAt: {
+      saleDate: {
         type: Sequelize.DATE,
         field: 'sale_date',
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       status: {
         type: Sequelize.STRING,
