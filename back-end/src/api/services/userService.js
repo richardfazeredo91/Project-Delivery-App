@@ -7,9 +7,9 @@ const createCustomer = async ({ name, email, password }) => {
 
   const hashPassword = crypto.createHash('md5').update(password).digest('hex');
   
-  await User.create({ name, email, password: hashPassword, role });
-  
-  const token = generateToken(email, hashPassword, role);
+  const user = await User.create({ name, email, password: hashPassword, role });
+
+  const token = generateToken(email, user.id, role);
  
   return {
     name,
