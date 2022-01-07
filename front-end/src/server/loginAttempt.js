@@ -10,9 +10,7 @@ const loginAttempt = async (email, password) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
+    .then((data) => data);
   return loginData;
 };
 

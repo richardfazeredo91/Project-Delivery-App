@@ -5,9 +5,9 @@ import { useAppContext } from '../context/AppContext';
 
 const CustomerProducts = () => {
   const { products, getProducts } = useAppContext();
-  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
-    if (!token) {
+    if (!user.token) {
       localStorage.clear();
       window.location.href = '/';
     }

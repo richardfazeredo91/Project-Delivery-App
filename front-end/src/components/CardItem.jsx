@@ -15,13 +15,13 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => (
         <input
           type="button"
           value="-"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
+          data-testid={ `customer_products__button-card-rm-item${id}` }
         />
-        <p data-testid={ `customer_products__input-card-quantity-${id}` }>0</p>
+        <p data-testid={ `customer_products__input-card-quantity${id}` }>0</p>
         <input
           type="button"
           value="+"
-          data-testid={ `customer_products__button-card-add-item-${id}` }
+          data-testid={ `customer_products__button-card-add-item${id}` }
         />
       </div>
     </div>
