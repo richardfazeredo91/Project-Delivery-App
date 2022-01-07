@@ -4,11 +4,12 @@ import CardItem from '../components/CardItem';
 
 const CustomerProducts = () => {
   return (
-  <div>
-    <h1>CustomerProducts</h1>
-    <Header />
-    <CardItem />
-  </div>
+    <div>
+      <h1>CustomerProducts</h1>
+      <Header />
+      {/* /product/listall */}
+      <CardItem />
+    </div>
   );
 };
 
