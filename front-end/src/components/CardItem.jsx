@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CardItem = () => {
+  return (
   <div>
     <h1 data-testid="customer_products__element-card-price-">Price</h1>
     <img
@@ -26,7 +27,8 @@ const CardItem = () => {
         </button>
       </div>
     </div>
-  </div>;
+  </div>
+  );
 };
 
 export default CardItem;
