@@ -13,8 +13,8 @@ module.exports = {
         status: 'Em Trânsito',
       },
       {
-        user_id: 4,
-        seller_id: 5,
+        user_id: 3,
+        seller_id: 2,
         total_price: 2650.90,
         delivery_address: 'Rua Santo André - SP - São Paulo',
         delivery_number: '45',
@@ -29,11 +29,11 @@ module.exports = {
         status: 'Entregue',
       },
       {
-        user_id: 4,
+        user_id: 3,
         seller_id: 2,
         total_price: 720.30,
-        delivery_address: 'Rua Santo André - SP - São Paulo',
-        delivery_number: '231',
+        delivery_address: 'Rua do João - SP - São Paulo',
+        delivery_number: '2500',
         status: 'Preparando',
       }
     ];
