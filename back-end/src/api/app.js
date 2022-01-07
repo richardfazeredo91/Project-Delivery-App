@@ -1,7 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const error = require('./middlewares/error');
 const userRoute = require('./routes/usersRoutes');
-const cors = require('cors');
 
 const app = express();
 
