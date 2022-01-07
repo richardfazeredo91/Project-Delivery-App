@@ -1,26 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CardItem = () => (
+const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => (
   <div>
-    <h1 data-testid="customer_products__element-card-price-">Price</h1>
+    <h1 data-testid={ `customer_products__element-card-price-${id}` }>{ price }</h1>
     <img
-      data-testid="customer_products__img-card-bg-image-"
-      src="https://via.placeholder.com/150"
+      data-testid={ `customer_products__img-card-bg-image-${id}` }
+      src={ urlImage }
       alt="placeholder"
     />
     <div>
-      <p data-testid="customer_products__element-card-title-">Title</p>
+      <p data-testid={ `customer_products__element-card-title-${id}` }>{ name }</p>
       <div>
         <button
           type="button"
-          data-testid="customer_products__button-card-rm-item-"
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
         >
           --
         </button>
-        <p data-testid="customer_products__input-card-quantity-">0</p>
+        <p data-testid={ `customer_products__input-card-quantity-${id}` }>0</p>
         <button
           type="button"
-          data-testid="customer_products__button-card-add-item-"
+          data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           +
         </button>
@@ -28,5 +29,14 @@ const CardItem = () => (
     </div>
   </div>
 );
+
+CardItem.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    url_image: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default CardItem;
