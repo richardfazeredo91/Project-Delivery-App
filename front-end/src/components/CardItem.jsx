@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => (
   <div>
-    <h1 data-testid={ `customer_products__element-card-price-${id}` }>{ price }</h1>
+n    <h1 data-testid={ `customer_products__element-card-price-${id}` }>
+      { price.replace(/\./, ',') }
+    </h1>
     <img
       data-testid={ `customer_products__img-card-bg-image-${id}` }
       src={ urlImage }
