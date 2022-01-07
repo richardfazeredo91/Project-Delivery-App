@@ -7,10 +7,13 @@ const CustomerProducts = () => {
   const { products, getProducts } = useAppContext();
   const token = localStorage.getItem('token');
   useEffect(() => {
+    if (!token) {
+      localStorage.clear();
+      window.location.href = '/';
+    }
     getProducts();
   }, []);
 
-  !token ? window.location.href = '/' : null; 
   return (
     <div>
       <Header />

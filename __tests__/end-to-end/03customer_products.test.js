@@ -53,6 +53,7 @@ describe(requirement(12), () => {
   test("O avaliador testará os data-testids referentes aos card de cada produto",
     async () => {
       for(const id of cardIds){
+        console.log("AQUI O NOSSO LOG" + " " + customerProductsPage.element.card.title + `[data-testid$='-${id}']`);
         await expect(page).toFindElement(
           customerProductsPage.element.card.title + `[data-testid$='-${id}']`
         );
