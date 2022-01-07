@@ -1,24 +1,29 @@
 const Sale = (sequelize, DataTypes) => {
   const Sale = sequelize.define("Sale", {
-    userId: DataTypes.INTEGER,
-    sellerId: DataTypes.INTEGER,
-    totalPrice: DataTypes.DECIMAL,
-    deliveryAddress: DataTypes.STRING,
-    deliveryNumber: DataTypes.STRING,
+    user_id: DataTypes.INTEGER,
+    seller_id: DataTypes.INTEGER,
+    total_price: DataTypes.DECIMAL,
+    delivery_address: DataTypes.STRING,
+    delivery_number: DataTypes.STRING,
+    sale_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
     status: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
   },
   {
-    timestamps: true,
+    timestamps: false,
+    tableName: 'sales',
     updatedAt: false,
+    createdAt: false,
     underscored: true,
   });
 
   Sale.associate = (models) => {
     Sale.hasMany(models.User,
-      {foreignKey: 'id', as: 'user_id'});
+      {foreignKey: 'id', as: 'userId'});
     Sale.hasMany(models.User,
-      {foreignKey: 'id', as: 'seller_id'}); 
+      {foreignKey: 'id', as: 'sellerId'}); 
   }
 
   return Sale;

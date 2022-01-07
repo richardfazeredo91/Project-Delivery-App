@@ -31,7 +31,7 @@ module.exports = {
         }
       },
       totalPrice: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL,
         field: 'total_price',
         allowNull: false,
       },
@@ -45,10 +45,10 @@ module.exports = {
         field: 'delivery_number',
         allowNull: false,
       },
-      createdAt: {
+      saleDate: {
         type: Sequelize.DATE,
         field: 'sale_date',
-        allowNull: false,
+        defaultValue: Sequelize.NOW
       },
       status: {
         type: Sequelize.STRING,

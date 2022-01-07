@@ -1,16 +1,17 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface) => {
   const data = [
-    {name:'Delivery App Admin', email:'adm@deliveryapp.com', password:'a4c86edecc5aee06eff8fdeda69e0d04', role:'administrator'},
-    {name:'Fulana Pereira', email:'fulana@deliveryapp.com', password:'3c28d2b0881bf46457a853e0b07531c6', role:'seller'},
-    {name:'Cliente Zé Birita', email:'zebirita@email.com', password:'1c37466c159755ce1fa181bd247cb925', role:'customer'},
+    {name:'Adm Wonder', email:'wonder@email.com', password:'e10adc3949ba59abbe56e057f20f883e', role:'administrator'},
+    {name:'Vend Batman', email:'batman@email.com', password:'e10adc3949ba59abbe56e057f20f883e', role:'seller'},
+    {name:'Cliente Hulk', email:'hulk@email.com', password:'e10adc3949ba59abbe56e057f20f883e', role:'customer'},
+    {name:'Cliente Spider', email:'spider@email.com', password:'e10adc3949ba59abbe56e057f20f883e', role:'customer'},
+    {name:'Vend Iron', email:'iron@email.com', password:'e10adc3949ba59abbe56e057f20f883e', role:'seller'},
   ];
     return queryInterface.bulkInsert('users', data, {});
   },
 
-  down: async (queryInterface, Sequelize) => {
-    down: async (queryInterface) => queryInterface.bulkDelete('users', null, {});
-  }
+  down: async (queryInterface) => queryInterface.bulkDelete('users', null, {})
+
 };

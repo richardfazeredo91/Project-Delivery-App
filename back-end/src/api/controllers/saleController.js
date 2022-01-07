@@ -2,13 +2,14 @@ const saleService = require('../services/saleService');
 
 const getSales = async (req, res, next) => {
   try {
-    const { userId, role } = req.user;
+    const { user_id, role } = req.user;
     
-    const response = await saleService.getSales({ userId, role });
+    const response = await saleService.getSales({ user_id, role });
 
-    res.status(201).json(response);
+    res.status(200).json(response);
+
   } catch (error) {
-    console.log(error);
+
     next(error);
   }
 };
