@@ -3,6 +3,7 @@ const cors = require('cors');
 const error = require('./middlewares/error');
 const userRoute = require('./routes/usersRoutes');
 const saleRoute = require('./routes/salesRoutes');
+const productRoute = require('./routes/productsRoutes');
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(express.json());
 
 app.use('/user', userRoute);
 app.use('/sale', saleRoute);
+app.use('/product', productRoute);
+
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 app.use(error);
