@@ -28,7 +28,7 @@ const loginUser = async ({ email, password }) => {
 
   if (!user) throw Error('USER_NOT_FOUND');
 
-  const token = generateToken(user.email, hashPassword, user.role);
+  const token = generateToken(user.email, user.id, user.role);
     console.log(user);
   return {
     name: user.name,

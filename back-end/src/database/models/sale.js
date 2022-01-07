@@ -6,6 +6,7 @@ const Sale = (sequelize, DataTypes) => {
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     status: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
   },
   {
     timestamps: true,
