@@ -47,7 +47,7 @@ describe(requirement(11), () => {
   });
 });
 
-describe(requirement(12), () => {
+describe.only(requirement(12), () => {
   const cardIds = products.state01.map((el) => el.id);
 
   test("O avaliador testará os data-testids referentes aos card de cada produto",
@@ -77,7 +77,7 @@ describe(requirement(12), () => {
   );
 });
 
-describe(requirement(13), () => {
+describe.only(requirement(13), () => {
   test("O avaliador testará se o local storage contém os dados da pessoa usuária", async () => {
     const { name, email } = user.customer();
 

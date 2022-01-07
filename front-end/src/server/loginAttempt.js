@@ -11,9 +11,6 @@ const loginAttempt = async (email, password) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.user);
       return data;
     });
   return loginData;
