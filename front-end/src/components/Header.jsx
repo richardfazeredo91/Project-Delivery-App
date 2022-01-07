@@ -7,7 +7,13 @@ const handleExitButton = (e) => {
 };
 
 const Header = () => {
-  const name = JSON.parse(localStorage.getItem('user')).name;
+  const user = localStorage.getItem('user');
+  if (typeof user !== 'string') {
+    window.location.href = '/';
+  }
+
+  const { name } = JSON.parse(user);
+
   return (
     <div className="headerContainer">
       <button
