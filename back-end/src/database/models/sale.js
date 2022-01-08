@@ -20,7 +20,9 @@ const Sale = (sequelize, DataTypes) => {
     Sale.hasMany(models.User,
       {foreignKey: 'id', as: 'user_id'});
     Sale.hasMany(models.User,
-      {foreignKey: 'id', as: 'seller_id'}); 
+      {foreignKey: 'id', as: 'seller_id'});
+    Sale.hasMany(models.SalesProduct,
+      {foreignKey: 'saleId', as: 'quantity'});
   }
 
   return Sale;

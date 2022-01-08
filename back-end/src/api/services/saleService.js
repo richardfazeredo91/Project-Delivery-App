@@ -1,4 +1,4 @@
-const { Sale, User, SalesProduct } = require('../../database/models');
+const { Sale, User, SalesProduct, Product } = require('../../database/models');
 
 const getSales = async ({ userId, role }) => {
   try {
@@ -57,7 +57,39 @@ const createSale = async ({ products, sellerName, totalPrice, deliveryAddress, d
   return sale;
 };
 
+const formatSale = (sale) => ({
+    ...sale,
+    products: sale.products.map((item) => ({
+      ...item,
+      quantity: item.quantity[0].quantity, 
+    })),
+  });
+
+const getSaleDetails = async ({ userId }, saleId) => {
+ const sale = await Sale.findOne({
+  where: { id: saleId },
+  include: [{
+    model: Product,
+    as: 'products',
+    through: { attributes: [] },
+    include: {
+      model: SalesProduct,
+      as: 'quantity',
+      attributes: { exclude: ['saleId', 'productId'] },
+      where: { saleId },
+      nest: false,
+     },
+  }],
+  // include: [{ all: true, nested: true  }],
+  }).then((data) => data.get({ plain: true }));
+
+  if (sale.userId !== userId) throw Error('ACCESS_DENIED');
+   
+ return formatSale(sale);
+};
+
 module.exports = {
   createSale,
   getSales,
+  getSaleDetails,
 };
