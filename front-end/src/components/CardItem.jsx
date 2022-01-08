@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => (
   <div>
-n    <h1 data-testid={ `customer_products__element-card-price-${id}` }>
+    <h1 data-testid={ `customer_products__element-card-price-${id}` }>
       { price.replace(/\./, ',') }
     </h1>
     <img
@@ -17,13 +17,13 @@ n    <h1 data-testid={ `customer_products__element-card-price-${id}` }>
         <input
           type="button"
           value="-"
-          data-testid={ `customer_products__button-card-rm-item${id}` }
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
         />
-        <p data-testid={ `customer_products__input-card-quantity${id}` }>0</p>
+        <p data-testid={ `customer_products__input-card-quantity-${id}` }>0</p>
         <input
           type="button"
           value="+"
-          data-testid={ `customer_products__button-card-add-item${id}` }
+          data-testid={ `customer_products__button-card-add-item-${id}` }
         />
       </div>
     </div>

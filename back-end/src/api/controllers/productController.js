@@ -5,8 +5,8 @@ const getAll = async (_req, res, next) => {
     const products = await Product.findAll();
     return res.status(200).json(products);
   } catch (error) {
-    next(error)  
+    next(error);  
   }
-}
+};
 
 module.exports = { getAll };
