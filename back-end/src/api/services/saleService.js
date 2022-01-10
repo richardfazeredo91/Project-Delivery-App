@@ -1,27 +1,17 @@
 const { Sale, User, SalesProduct, Product } = require('../../database/models');
 
 const getSales = async ({ userId, role }) => {
-  try {
+
+    let sales;
     if (role === 'customer') {
-      const sales = await Sale.findAll({ where: { userId } });
-      
-      console.log(sales);
-
-      if (!sales) throw Error('SALES_NOT_FOUND');
-
-      return sales;
+      sales = await Sale.findAll({ where: { userId } });
     }
 
-    // if (role === 'administrator') {
-    //   const sales = await Sale.findAll();
-
-    //   if (!sales) throw Error('SALES_NOT_FOUND');
-  
-    //     return sales;
-    // }
-  } catch (error) {
-    return error;
-  }
+    if (role === 'seller') {
+      sales = await Sale.findAll({ where: { sellerId: userId } });
+    }
+    
+    return sales;
 };
 
 const createProductSales = async (products, saleId, t) => {
@@ -83,7 +73,7 @@ const getSaleDetails = async ({ userId }, saleId) => {
   // include: [{ all: true, nested: true  }],
   }).then((data) => data.get({ plain: true }));
 
-  if (sale.userId !== userId) throw Error('ACCESS_DENIED');
+  if (sale.userId !== userId && sale.sellerId !== userId) throw Error('ACCESS_DENIED');
    
  return formatSale(sale);
 };
