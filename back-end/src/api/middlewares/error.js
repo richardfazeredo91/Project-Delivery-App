@@ -13,6 +13,6 @@ module.exports = (err, _req, res, _next) => {
   let response;
   if (err.parent) response = decoder[err.parent.code];
   else response = decoder[err.message];
-  return res.status(response.status || 500)
-  .json({ message: response.message || 'internal server error' });
+  return res.status(response?.status || 500)
+  .json({ message: response?.message || 'internal server error' });
 };

@@ -1,7 +1,6 @@
 const { Sale, User, SalesProduct, Product } = require('../../database/models');
 
 const getSales = async ({ userId, role }) => {
-
     let sales;
     if (role === 'customer') {
       sales = await Sale.findAll({ where: { userId } });
@@ -73,13 +72,31 @@ const getSaleDetails = async ({ userId }, saleId) => {
   // include: [{ all: true, nested: true  }],
   }).then((data) => data.get({ plain: true }));
 
+  if(!sale) throw Error('SALE_NOT_FOUND');
+
   if (sale.userId !== userId && sale.sellerId !== userId) throw Error('ACCESS_DENIED');
    
  return formatSale(sale);
 };
 
+const updateStatus = async({ status }, { userId }, saleId) => {
+  const sale  = await Sale.findOne({where: {id: saleId}});
+
+  if(!sale) throw Error('SALE_NOT_FOUND');
+
+  if (sale.userId !== userId && sale.sellerId !== userId) throw Error('ACCESS_DENIED');
+
+  await Sale.update(
+    { status },
+    {where: {id: saleId}},
+  );
+
+  return {...sale.dataValues, status};
+}
+
 module.exports = {
   createSale,
   getSales,
   getSaleDetails,
+  updateStatus,
 };
