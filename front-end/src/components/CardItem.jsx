@@ -16,19 +16,23 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => (
       <div>
         <button
           type="button"
-          value="-"
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
-        >
-          +
-        </button>
-        <input data-testid={ `customer_products__input-card-quantity-${id}` } />
-        <button
-          type="button"
           value="+"
           data-testid={ `customer_products__button-card-add-item-${id}` }
         >
           -
         </button>
+        <input
+          data-testid={ `customer_products__input-card-quantity-${id}` }
+          value="0"
+        />
+        <button
+          type="button"
+          value="-"
+          data-testid={ `customer_products__button-card-rm-item-${id}` }
+        >
+          +
+        </button>
+
       </div>
     </div>
   </div>
