@@ -5,10 +5,10 @@ const path = require('path');
 const jwtSecret = fs
 .readFileSync(path.normalize(`${__dirname}/../../../jwt.evaluation.key`), 'utf8');
 
-const generateToken = (email, password, role) => {
+const generateToken = (email, userId, role) => {
   const payload = {
     email,
-    password,
+    userId,
     role,
   };
   

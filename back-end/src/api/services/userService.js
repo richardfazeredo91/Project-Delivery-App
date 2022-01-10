@@ -7,9 +7,9 @@ const createCustomer = async ({ name, email, password }) => {
 
   const hashPassword = crypto.createHash('md5').update(password).digest('hex');
   
-  await User.create({ name, email, password: hashPassword, role });
-  
-  const token = generateToken(email, hashPassword, role);
+  const user = await User.create({ name, email, password: hashPassword, role });
+
+  const token = generateToken(email, user.id, role);
  
   return {
     name,
@@ -28,7 +28,7 @@ const loginUser = async ({ email, password }) => {
 
   if (!user) throw Error('USER_NOT_FOUND');
 
-  const token = generateToken(user.email, hashPassword, user.role);
+  const token = generateToken(user.email, user.id, user.role);
     console.log(user);
   return {
     name: user.name,
@@ -38,7 +38,16 @@ const loginUser = async ({ email, password }) => {
   };
 };
 
+const getAllSellers = async () => {
+const sellers = User.findAll({
+  where: { role: 'seller' },
+});
+
+return sellers;
+};
+
 module.exports = {
   createCustomer,
   loginUser,
+  getAllSellers,
 };

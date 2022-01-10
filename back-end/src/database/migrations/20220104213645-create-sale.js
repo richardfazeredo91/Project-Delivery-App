@@ -1,7 +1,4 @@
 'use strict';
-
-const sequelize = require("sequelize");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('sales', {
@@ -34,7 +31,7 @@ module.exports = {
         }
       },
       totalPrice: {
-        type: Sequelize.STRING,
+        type: Sequelize.DECIMAL,
         field: 'total_price',
         allowNull: false,
       },
@@ -48,10 +45,11 @@ module.exports = {
         field: 'delivery_number',
         allowNull: false,
       },
-      createdAt: {
+      saleDate: {
         type: Sequelize.DATE,
         field: 'sale_date',
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       status: {
         type: Sequelize.STRING,
