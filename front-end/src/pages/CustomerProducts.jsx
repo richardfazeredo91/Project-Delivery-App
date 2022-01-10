@@ -17,12 +17,13 @@ const CustomerProducts = () => {
   return (
     <div>
       <Header />
-      {products.length > 0 ? console.log(products) : null}
-      {
-        products.length ? products.map((product) => (
+      {products.length ? (
+        products.map((product) => (
           <CardItem key={ product.id } product={ product } />
-        )) : <p>No products</p>
-      }
+        ))
+      ) : (
+        <p>No products</p>
+      )}
     </div>
   );
 };
