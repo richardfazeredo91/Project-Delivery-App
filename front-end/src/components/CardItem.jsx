@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useShoppingCardContext } from '../context/ShoppingCardContext';
+import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
-  const { products, setProducts } = useShoppingCardContext();
+  const { products, setProducts } = useShoppingCartContext();
   const [quantity, setQuantity] = useState(0);
 
   function handleCardQuantityProducts(e) {

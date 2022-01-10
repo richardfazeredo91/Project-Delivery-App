@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const MyShoppingCardContext = React.createContext();
+const MyShoppingCartContext = React.createContext();
 
-function ShoppingCardContext({ children }) {
+function ShoppingCartContext({ children }) {
   const [products, setProducts] = useState({});
 
   useEffect(() => {
@@ -16,19 +16,19 @@ function ShoppingCardContext({ children }) {
   };
 
   return (
-    <MyShoppingCardContext.Provider value={ contextValue }>
+    <MyShoppingCartContext.Provider value={ contextValue }>
       {children}
-    </MyShoppingCardContext.Provider>
+    </MyShoppingCartContext.Provider>
   );
 }
 
-export default ShoppingCardContext;
+export default ShoppingCartContext;
 
-const useShoppingCardContext = () => useContext(MyShoppingCardContext);
+const useShoppingCartContext = () => useContext(MyShoppingCartContext);
 
-export { useShoppingCardContext };
+export { useShoppingCartContext };
 
-ShoppingCardContext.propTypes = {
+ShoppingCartContext.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

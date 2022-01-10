@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import CardItem from '../components/CardItem';
-import ShoppingCardContext from '../context/ShoppingCardContext';
+import ShoppingCartContext from '../context/ShoppingCartContext';
 import { useAppContext } from '../context/AppContext';
 
 const CustomerProducts = () => {
@@ -17,7 +17,7 @@ const CustomerProducts = () => {
   }, [getProducts]);
 
   return (
-    <ShoppingCardContext>
+    <ShoppingCartContext>
       <Header />
       {products.length ? (
         products.map((product) => (
@@ -26,7 +26,13 @@ const CustomerProducts = () => {
       ) : (
         <p>No products</p>
       )}
-    </ShoppingCardContext>
+      <button
+        data-testid="customer_products__button-cart"
+        type="button"
+      >
+        {/* <p data-testid="customer_products__checkout-bottom-value">{totalShoppingCart}</p> */}
+      </button>
+    </ShoppingCartContext>
   );
 };
 
