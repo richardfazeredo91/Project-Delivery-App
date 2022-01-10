@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import productsGetAll from '../server/productsGetAll';
 
-const MyContext = React.createContext();
+const UserContext = React.createContext();
 
 function AppContext({ children }) {
   const [user, setUser] = useState({ email: '' });
@@ -21,13 +21,13 @@ function AppContext({ children }) {
   };
 
   return (
-    <MyContext.Provider value={ contextValue }>{children}</MyContext.Provider>
+    <UserContext.Provider value={ contextValue }>{children}</UserContext.Provider>
   );
 }
 
 export default AppContext;
 
-const useAppContext = () => useContext(MyContext);
+const useAppContext = () => useContext(UserContext);
 
 export { useAppContext };
 

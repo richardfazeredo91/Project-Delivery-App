@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import CardItem from '../components/CardItem';
+import ShoppingCardContext from '../context/ShoppingCardContext';
 import { useAppContext } from '../context/AppContext';
 
 const CustomerProducts = () => {
   const { products, getProducts } = useAppContext();
-  const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
     if (!user.token) {
       localStorage.clear();
       window.location.href = '/';
     }
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
-    <div>
+    <ShoppingCardContext>
       <Header />
       {products.length ? (
         products.map((product) => (
@@ -24,7 +26,7 @@ const CustomerProducts = () => {
       ) : (
         <p>No products</p>
       )}
-    </div>
+    </ShoppingCardContext>
   );
 };
 

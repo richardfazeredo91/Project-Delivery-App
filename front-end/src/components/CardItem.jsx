@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useShoppingCardContext } from '../context/ShoppingCardContext';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
+  const { products, setProducts } = useShoppingCardContext();
   const [quantity, setQuantity] = useState(0);
 
   function handleCardQuantityProducts(e) {
@@ -10,19 +12,21 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
       console.log('subtract');
       if (quantity === 0) break;
       setQuantity(quantity - 1);
+      products[id] = { name, quantity: quantity - 1, price };
+      setProducts(products);
+      localStorage.setItem('products', JSON.stringify(products));
       break;
     case 'add':
       console.log('add');
       setQuantity(quantity + 1);
+      products[id] = { name, quantity: quantity + 1, price };
+      setProducts(products);
+      localStorage.setItem('products', JSON.stringify(products));
       break;
     default:
       console.log(`Sorry, we are out of ${e.target.name}.`);
     }
   }
-
-  useEffect(() => {
-    handleShoppingCart(id, price, name, quantity);
-  }, [quantity])
 
   return (
     <div>
@@ -46,12 +50,11 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
             data-testid={ `customer_products__button-card-add-item-${id}` }
             onClick={ handleCardQuantityProducts }
           >
-            -
+            +
           </button>
-          <input
-            data-testid={ `customer_products__input-card-quantity-${id}` }
-            value={ quantity }
-          />
+          <p ata-testid={ `customer_products__input-card-quantity-${id}` }>
+            { quantity }
+          </p>
           <button
             type="button"
             name="subtract"
@@ -59,7 +62,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
             data-testid={ `customer_products__button-card-rm-item-${id}` }
             onClick={ handleCardQuantityProducts }
           >
-            +
+            -
           </button>
         </div>
       </div>
@@ -70,7 +73,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
 CardItem.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     url_image: PropTypes.string.isRequired,
   }).isRequired,
