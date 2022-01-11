@@ -5,18 +5,21 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CustomerProducts from './pages/CustomerProducts';
 import AppContext from './context/AppContext';
+import ShoppingCartContext from './context/ShoppingCartContext';
 
 function App() {
   return (
     <AppContext>
-      <Router>
-        <Routes>
-          <Route path="/customer/products" element={ <CustomerProducts /> } />
-          <Route path="/login" element={ <LoginPage /> } />
-          <Route path="/register" element={ <RegisterPage /> } />
-          <Route path="/" element={ <Navigate replace to="/login" /> } />
-        </Routes>
-      </Router>
+      <ShoppingCartContext>
+        <Router>
+          <Routes>
+            <Route path="/customer/products" element={ <CustomerProducts /> } />
+            <Route path="/login" element={ <LoginPage /> } />
+            <Route path="/register" element={ <RegisterPage /> } />
+            <Route path="/" element={ <Navigate replace to="/login" /> } />
+          </Routes>
+        </Router>
+      </ShoppingCartContext>
     </AppContext>
   );
 }

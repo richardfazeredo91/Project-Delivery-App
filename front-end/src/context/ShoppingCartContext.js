@@ -5,14 +5,23 @@ const MyShoppingCartContext = React.createContext();
 
 function ShoppingCartContext({ children }) {
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState('0');
 
   useEffect(() => {
-    console.log('entrou no usereffect do context do shopping card');
+    console.log('entrou no usereffect do context do shopping card', products);
+    const sumAllValueProducts = products.reduce(
+      (totalValue, item) => (Number(item.quantity) * Number(item.price)) + totalValue,
+      0,
+    ).toFixed(2);
+    console.log('sumAllValueProducts---->', sumAllValueProducts);
+    setTotalPrice(String(sumAllValueProducts));
+    localStorage.setItem('products', JSON.stringify(products));
   }, [products]);
 
   const contextValue = {
     setProducts,
     products,
+    totalPrice,
   };
 
   return (

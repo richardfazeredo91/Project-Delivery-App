@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import CardItem from '../components/CardItem';
-import ShoppingCartContext from '../context/ShoppingCartContext';
 import { useAppContext } from '../context/AppContext';
+import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const CustomerProducts = () => {
   const { products, getProducts } = useAppContext();
+  const { totalPrice } = useShoppingCartContext();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -17,7 +18,7 @@ const CustomerProducts = () => {
   }, [getProducts]);
 
   return (
-    <ShoppingCartContext>
+    <>
       <Header />
       {products.length ? (
         products.map((product) => (
@@ -30,9 +31,11 @@ const CustomerProducts = () => {
         data-testid="customer_products__button-cart"
         type="button"
       >
-        {/* <p data-testid="customer_products__checkout-bottom-value">{totalShoppingCart}</p> */}
+        <p data-testid="customer_products__checkout-bottom-value">
+          {totalPrice.replace(/\./, ',')}
+        </p>
       </button>
-    </ShoppingCartContext>
+    </>
   );
 };
 

@@ -47,7 +47,7 @@ describe(requirement(11), () => {
   });
 });
 
-describe.only(requirement(12), () => {
+describe(requirement(12), () => {
   const cardIds = products.state01.map((el) => el.id);
 
   test("O avaliador testará os data-testids referentes aos card de cada produto",
@@ -154,7 +154,7 @@ describe(requirement(14), () => {
   );
 });
 
-describe(requirement(15), () => {
+describe.only(requirement(15), () => {
   const itemList = action.customer.getRandomProducts();
   showCurrentCart(itemList, requirement(15));
 

@@ -18,41 +18,66 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
         setQuantity(quantity - 1);
         updateProduct = products.filter((product) => product.id !== id);
         setProducts(updateProduct);
-        localStorage.setItem('products', JSON.stringify(updateProduct));
         break;
       }
 
       setQuantity(quantity - 1);
-      updateProduct = { id, name, quantity: quantity - 1, price };
-
-      products.push(updateProduct);
-      setProducts(products);
-      localStorage.setItem('products', JSON.stringify(updateProduct));
+      updateProduct = products.map((product) => {
+        if (product.id === id) {
+          return { ...product, quantity: product.quantity - 1 };
+        }
+        return product;
+      });
+      setProducts(updateProduct);
       break;
     case 'add':
       console.log('add');
       if (quantity === 0) {
         setQuantity(quantity + 1);
-        updateProduct = { id, name, quantity: quantity + 1, price };
-        products.push(updateProduct);
-        setProducts(products);
-        localStorage.setItem('products', JSON.stringify(updateProduct));
+        updateProduct = { id, name, quantity: 1, price };
+        setProducts([...products, updateProduct]);
         break;
       }
 
       updateProduct = products.map((product) => {
-        if (product.id === id) {
-          return { ...product, quantity: product.quantity + 1 };
-        }
+        if (product.id === id) return { ...product, quantity: product.quantity + 1 };
         return product;
       });
-
+      setQuantity((quantity + 1));
       setProducts(updateProduct);
-      localStorage.setItem('products', JSON.stringify(updateProduct));
       break;
     default:
       console.log(`Sorry, we are out of ${e.target.name}.`);
     }
+  }
+
+  function handleInputQuantity(e) {
+    const inputNumber = Number(e.target.value);
+    let updateProduct;
+
+    if (quantity === 0) {
+      setQuantity(inputNumber);
+      const updatedProduct = { id, name, quantity: inputNumber, price };
+      setProducts([...products, updatedProduct]);
+      return;
+    }
+
+    if (!inputNumber) {
+      setQuantity(inputNumber);
+      updateProduct = products.filter((product) => product.id !== id);
+      setProducts(updateProduct);
+      return;
+    }
+
+    setQuantity(inputNumber);
+    updateProduct = products.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: inputNumber };
+      }
+      return product;
+    });
+
+    setProducts(updateProduct);
   }
 
   return (
@@ -82,6 +107,8 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
           <input
             data-testid={ `customer_products__input-card-quantity-${id}` }
             value={ quantity }
+            type="number"
+            onChange={ handleInputQuantity }
           />
           <button
             type="button"
