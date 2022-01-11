@@ -79,9 +79,10 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
           >
             +
           </button>
-          <p ata-testid={ `customer_products__input-card-quantity-${id}` }>
-            { quantity }
-          </p>
+          <input
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ quantity }
+          />
           <button
             type="button"
             name="subtract"
