@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-app.use('/images',express.static(path.normalize(`${__dirname}/../../public`)));
+app.use('/images', express.static(path.normalize(`${__dirname}/../../public`)));
 
 app.use('/user', userRoute);
 app.use('/sale', saleRoute);

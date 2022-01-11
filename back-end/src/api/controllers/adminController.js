@@ -6,10 +6,9 @@ const signUpNewUser = async (req, res, next) => {
 
   try {
     const result = await adminService.signUpNewUser(isAdmin, userData);
+    if (result.message) return res.status(result.code).json({ message: result.message });
 
-    result.message
-      ? res.status(result.code).json({ message: result.message })
-      : res.status(result.code).json(result.newUser);
+    return res.status(result.code).json(result.newUser);
   } catch (error) {
     console.log(error);
     next(error);
@@ -17,26 +16,28 @@ const signUpNewUser = async (req, res, next) => {
 };
 
 const getAllUsers = async (req, res, next) => {
-  try {
-    const result = await adminService.getAllUsers();
+  const isAdmin = req.user.role;
 
-    result.message
-      ? res.status(result.code).json({  message: result.message })
-      : res.status(result.code).json(result.users);
+  try {
+    const result = await adminService.getAllUsers(isAdmin);
+    if (result.message) return res.status(result.code).json({ message: result.message });
+
+    return res.status(result.code).json(result.users);
   } catch (error) {
     console.log(error);
     next(error);
   }
-}
+};
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
+  const isAdmin = req.user.role;
+
   try {
     const { id } = req.params;
-    const result = await adminService.deleteUser(id);
-    
-    result.message 
-      ? res.status(result.code).json({ message: result.message })
-      : res.status(result.code).json();
+    const result = await adminService.deleteUser(isAdmin, id);
+    if (result.message) return res.status(result.code).json({ message: result.message });
+
+    return res.status(result.code).json();
   } catch (error) {
     console.log(error);
     next(error);
