@@ -4,19 +4,6 @@ const config = require('../../database/config/config');
 
 const sequelize = new Sequelize(config.development);
 
-const getSales = async (req, res, next) => {
-  try {
-    const { userId, role } = req.user;
-    
-    const response = await saleService.getSales({ userId, role });
-
-    res.status(200).json(response);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-
   const createSale = async (req, res, next) => {
   const t = await sequelize.transaction();
   try {
@@ -29,6 +16,19 @@ const getSales = async (req, res, next) => {
     res.status(201).json(sale);
   } catch (error) {
     await t.rollback();
+    console.log(error);
+    next(error);
+  }
+};
+
+const getSalesByUser = async (req, res, next) => {
+  try {
+    const { userId, role } = req.user;
+    
+    const response = await saleService.getSalesByUser({ userId, role });
+
+    res.status(200).json(response);
+  } catch (error) {
     console.log(error);
     next(error);
   }
@@ -63,8 +63,8 @@ const updateStatus = async (req, res, next) => {
 };
 
 module.exports = {
-  getSales,
   createSale,
+  getSalesByUser,
   getSaleDetails,
   updateStatus,
 };

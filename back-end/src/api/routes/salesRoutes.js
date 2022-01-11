@@ -2,7 +2,7 @@ const saleRoute = require('express').Router();
 
 const { authenticateToken } = require('../middlewares/jwtToken');
 const { 
-  getSales,
+  getSalesByUser,
   createSale,
   getSaleDetails,
   updateStatus, 
@@ -10,7 +10,7 @@ const {
 const { validateNewSale, validateStatus } = require('../middlewares/validations');
 
 saleRoute.post('/', authenticateToken, validateNewSale, createSale);
-saleRoute.get('/customer', authenticateToken, getSales);
+saleRoute.get('/', authenticateToken, getSalesByUser);
 saleRoute.get('/details/:saleId', authenticateToken, getSaleDetails);
 saleRoute.put('/status/:saleId', authenticateToken, validateStatus, updateStatus);
 

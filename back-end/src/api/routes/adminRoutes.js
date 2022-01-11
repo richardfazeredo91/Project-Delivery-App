@@ -1,10 +1,10 @@
 const adminRoute = require('express').Router();
-const adminController = require('../controllers/adminController');
+const { getAllUsers, signUpNewUser, deleteUser } = require('../controllers/adminController');
 const { validateUser } = require('../middlewares/validations');
 const { authenticateToken } = require('../middlewares/jwtToken');
 
-adminRoute.get('/manage', authenticateToken, adminController.getAllUsers);
-adminRoute.post('/manage', authenticateToken, validateUser, adminController.signUpNewUser);
-adminRoute.delete('/manage/:id', authenticateToken, adminController.deleteUser);
+adminRoute.get('/', authenticateToken, getAllUsers);
+adminRoute.post('/register', authenticateToken, validateUser, signUpNewUser);
+adminRoute.delete('/delete/:id', authenticateToken, deleteUser);
 
 module.exports = adminRoute;

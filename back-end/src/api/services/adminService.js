@@ -1,47 +1,32 @@
 const crypto = require('crypto');
 const { User } = require('../../database/models');
 
+const getAllUsers = async (role) => {
+  if (role !== 'administrator') throw Error('ACCESS_DENIED');
+
+  const users = await User.findAll();
+  return users;
+};
+
 const signUpNewUser = async (role, newUser) => {
-  if (role !== 'administrator') {
-    return {
-      code: '401',
-      message: 'Somente admins podem cadastrar novos usuários',
-    };
-  }
+  if (role !== 'administrator') throw Error('ACCESS_DENIED');
 
   const hashPassword = crypto.createHash('md5').update(newUser.password).digest('hex');
   const userWithEncriptedPassword = { ...newUser, password: hashPassword };
 
   await User.create(userWithEncriptedPassword);
   const { password, ...newUserWithoutPwd } = newUser;
-  return { code: '201', newUser: newUserWithoutPwd };
-};
-
-const getAllUsers = async (role) => {
-  if (role !== 'administrator') {
-    return {
-      code: '401',
-      message: 'Somente admins podem consultar a lista de usuários',
-    };
-  }
-
-  const users = await User.findAll();
-  return { code: '200', users };
+  return newUserWithoutPwd;
 };
 
 const deleteUser = async (role, id) => {
-  if (role !== 'administrator') {
-    return {
-      code: '401',
-      message: 'Somente admins podem deletar usuários',
-    };
-  }
+  if (role !== 'administrator') throw Error('ACCESS_DENIED');
 
   const user = await User.findByPk(id);
-  if (!user) return { code: '404', message: 'usuário não encontrado!' };
+  if (!user) throw Error('USER_NOT_FOUND');
 
   await User.destroy({ where: { id } });
-  return { code: '200' };
+  return user;
 };
 
 module.exports = {

@@ -1,28 +1,26 @@
 const adminService = require('../services/adminService');
 
-const signUpNewUser = async (req, res, next) => {
-  const userData = req.body;
-  const isAdmin = req.user.role;
-
+const getAllUsers = async (req, res, next) => {
   try {
-    const result = await adminService.signUpNewUser(isAdmin, userData);
-    if (result.message) return res.status(result.code).json({ message: result.message });
+    const isAdmin = req.user.role;
 
-    return res.status(result.code).json(result.newUser);
+    const users = await adminService.getAllUsers(isAdmin);
+
+    return res.status(200).json(users);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
 
-const getAllUsers = async (req, res, next) => {
-  const isAdmin = req.user.role;
-
+const signUpNewUser = async (req, res, next) => {
   try {
-    const result = await adminService.getAllUsers(isAdmin);
-    if (result.message) return res.status(result.code).json({ message: result.message });
+    const userData = req.body;
+    const isAdmin = req.user.role;
 
-    return res.status(result.code).json(result.users);
+    const user = await adminService.signUpNewUser(isAdmin, userData);
+
+    return res.status(201).json(user);
   } catch (error) {
     console.log(error);
     next(error);
@@ -30,14 +28,13 @@ const getAllUsers = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-  const isAdmin = req.user.role;
-
   try {
+    const isAdmin = req.user.role;
     const { id } = req.params;
-    const result = await adminService.deleteUser(isAdmin, id);
-    if (result.message) return res.status(result.code).json({ message: result.message });
 
-    return res.status(result.code).json();
+    const user = await adminService.deleteUser(isAdmin, id);
+
+    return res.status(201).json(user);
   } catch (error) {
     console.log(error);
     next(error);
