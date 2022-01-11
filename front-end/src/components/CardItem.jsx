@@ -7,21 +7,48 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
   const [quantity, setQuantity] = useState(0);
 
   function handleCardQuantityProducts(e) {
+    let updateProduct;
+
     switch (e.target.name) {
     case 'subtract':
       console.log('subtract');
       if (quantity === 0) break;
+
+      if (quantity === 1) {
+        setQuantity(quantity - 1);
+        updateProduct = products.filter((product) => product.id !== id);
+        setProducts(updateProduct);
+        localStorage.setItem('products', JSON.stringify(updateProduct));
+        break;
+      }
+
       setQuantity(quantity - 1);
-      products[id] = { name, quantity: quantity - 1, price };
+      updateProduct = { id, name, quantity: quantity - 1, price };
+
+      products.push(updateProduct);
       setProducts(products);
-      localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem('products', JSON.stringify(updateProduct));
       break;
     case 'add':
       console.log('add');
-      setQuantity(quantity + 1);
-      products[id] = { name, quantity: quantity + 1, price };
-      setProducts(products);
-      localStorage.setItem('products', JSON.stringify(products));
+      if (quantity === 0) {
+        setQuantity(quantity + 1);
+        updateProduct = { id, name, quantity: quantity + 1, price };
+        products.push(updateProduct);
+        setProducts(products);
+        localStorage.setItem('products', JSON.stringify(updateProduct));
+        break;
+      }
+
+      updateProduct = products.map((product) => {
+        if (product.id === id) {
+          return { ...product, quantity: product.quantity + 1 };
+        }
+        return product;
+      });
+
+      setProducts(updateProduct);
+      localStorage.setItem('products', JSON.stringify(updateProduct));
       break;
     default:
       console.log(`Sorry, we are out of ${e.target.name}.`);

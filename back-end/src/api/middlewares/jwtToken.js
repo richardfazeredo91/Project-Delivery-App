@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const jwtSecret = fs
-.readFileSync(path.normalize(`${__dirname}/../../../jwt.evaluation.key`), 'utf8');
+.readFileSync(path.normalize(`${__dirname}/../../../jwt.evaluation.key`), 'utf8').trim();
 
 const generateToken = (email, userId, role) => {
   const payload = {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const MyShoppingCartContext = React.createContext();
 
 function ShoppingCartContext({ children }) {
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     console.log('entrou no usereffect do context do shopping card');
