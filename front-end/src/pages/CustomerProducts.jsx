@@ -14,7 +14,7 @@ const CustomerProducts = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user.token) {
       localStorage.clear();
-      window.location.href = '/';
+      navigate('/');
     }
     getProducts();
   }, [getProducts]);
