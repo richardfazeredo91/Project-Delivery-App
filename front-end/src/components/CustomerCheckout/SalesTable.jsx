@@ -29,13 +29,20 @@ function SalesTable({ sales }) {
 
   function tdMaker(index, { id, name, quantity, price }) {
     return (
-      <tr key={ id }>
-        <td>{index}</td>
-        <td>{name}</td>
-        <td>{quantity}</td>
-        <td>{price}</td>
-        <td>{subTotal(quantity, price)}</td>
-        <td>
+      <tr
+        key={ id }
+        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+      >
+        <td data-testid={ `element-order-table-name-${index}` }>{index}</td>
+        <td data-testid={ `element-order-table-name-${index}` }>{name}</td>
+        <td data-testid={ `element-order-table-quantity-${index}` }>{quantity}</td>
+        <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+          {price}
+        </td>
+        <td data-testid={ `element-order-table-sub-total-${index}` }>
+          {subTotal(quantity, price)}
+        </td>
+        <td data-testid={ `element-order-table-remove-${index}` }>
           <button type="button" onClick={ () => removeFromCart(id) }>
             Remover
           </button>
