@@ -8,12 +8,10 @@ function ShoppingCartContext({ children }) {
   const [totalPrice, setTotalPrice] = useState('0');
 
   useEffect(() => {
-    console.log('entrou no usereffect do context do shopping card', shoppingCart);
     const sumAllValueProducts = shoppingCart.reduce(
       (totalValue, item) => (Number(item.quantity) * Number(item.price)) + totalValue,
       0,
     ).toFixed(2);
-    console.log('sumAllValueProducts---->', sumAllValueProducts);
     setTotalPrice(String(sumAllValueProducts));
     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
   }, [shoppingCart]);
