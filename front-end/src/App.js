@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import CustomerProducts from './pages/CustomerProducts';
 import AppContext from './context/AppContext';
 import ShoppingCartContext from './context/ShoppingCartContext';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <ShoppingCartContext>
         <Router>
           <Routes>
+            <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/login" element={ <LoginPage /> } />
             <Route path="/register" element={ <RegisterPage /> } />

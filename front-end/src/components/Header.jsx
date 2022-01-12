@@ -1,12 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const handleExitButton = (e) => {
-  e.preventDefault();
-  localStorage.clear();
-  window.location.href = '/';
-};
+function Header() {
+  const navegate = useNavigate();
 
-const Header = () => {
+  const handleExitButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navegate('/');
+  };
+
   const user = localStorage.getItem('user');
   if (typeof user !== 'string') {
     window.location.href = '/';
@@ -40,6 +43,6 @@ const Header = () => {
       </button>
     </div>
   );
-};
+}
 
 export default Header;
