@@ -6,6 +6,7 @@ const error = require('./middlewares/error');
 const userRoute = require('./routes/usersRoutes');
 const saleRoute = require('./routes/salesRoutes');
 const productRoute = require('./routes/productsRoutes');
+const adminRoute = require('./routes/adminRoutes');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/images', express.static(path.normalize(`${__dirname}/../../public`)));
 app.use('/user', userRoute);
 app.use('/sale', saleRoute);
 app.use('/product', productRoute);
+app.use('/admin', adminRoute);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 

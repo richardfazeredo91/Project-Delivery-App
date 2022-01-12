@@ -7,6 +7,7 @@ const validateUser = (req, _res, next) => {
     name: joi.string().min(12).required(),
     email: joi.string().email().required(),
     password: joi.string().min(6).required(),
+    role: joi.any().valid('customer', 'seller', 'administrator'),
   }).validate(body);
 
   if (error) throw Error('INVALID_FIELDS');
@@ -49,8 +50,20 @@ const validateNewSale = (req, _res, next) => {
   return next();
 };
 
+const validateStatus = (req, _res, next) => {
+  const { body } = req;
+
+  const { error } = joi.object({
+    status: joi.any().valid('preparando', 'em entrega', 'entregue').required(),
+  }).validate(body);
+
+  if (error) throw Error('INVALID_FIELDS');
+
+  return next();
+};
 module.exports = {
   validateUser,
   validateLogin,
   validateNewSale,
+  validateStatus,
 };

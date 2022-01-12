@@ -26,10 +26,10 @@ const loginUser = async ({ email, password }) => {
     { where: { email, password: hashPassword } },
   );
 
-  if (!user) throw Error('USER_NOT_FOUND');
+  if (!user) throw Error('WRONG_CREDENTIALS');
 
   const token = generateToken(user.email, user.id, user.role);
-    console.log(user);
+
   return {
     name: user.name,
     email: user.email,
