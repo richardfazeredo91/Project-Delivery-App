@@ -3,31 +3,31 @@ import PropTypes from 'prop-types';
 import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
-  const { products, setProducts } = useShoppingCartContext();
+  const { shoppingCart, setShoppingCart } = useShoppingCartContext();
   const [quantity, setQuantity] = useState(0);
   const [isOnCart, setIsOnCart] = useState(false);
 
   const removeFromCart = () => {
-    const newProductList = products.filter((product) => product.id !== id);
-    setProducts(newProductList);
+    const newProductList = shoppingCart.filter((product) => product.id !== id);
+    setShoppingCart(newProductList);
     setIsOnCart(false);
   };
 
   const addToCart = () => {
     const newProduct = { id, name, quantity, price };
-    setProducts([...products, newProduct]);
+    setShoppingCart([...shoppingCart, newProduct]);
     setIsOnCart(true);
   };
 
   const updateQauntity = () => {
-    const newProductList = products.map((product) => {
+    const newProductList = shoppingCart.map((product) => {
       if (product.id === id) {
         return { ...product, quantity };
       }
       return product;
     });
 
-    setProducts(newProductList);
+    setShoppingCart(newProductList);
   };
 
   const handleShopingCart = () => {
@@ -75,7 +75,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
             name="subtract"
             value="-"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            onClick={ () => setQuantity(quantity - 1) }
+            onClick={ () => setQuantity(quantity > 0 ? quantity - 1 : 0) }
           >
             -
           </button>

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import CardItem from '../components/CardItem';
 import { useAppContext } from '../context/AppContext';
@@ -6,7 +7,8 @@ import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const CustomerProducts = () => {
   const { products, getProducts } = useAppContext();
-  const { totalPrice } = useShoppingCartContext();
+  const { totalPrice, shoppingCart } = useShoppingCartContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -30,6 +32,8 @@ const CustomerProducts = () => {
       <button
         data-testid="customer_products__button-cart"
         type="button"
+        disabled={ !shoppingCart.length }
+        onClick={ () => navigate('/customer/checkout') }
       >
         <p data-testid="customer_products__checkout-bottom-value">
           {totalPrice.replace(/\./, ',')}

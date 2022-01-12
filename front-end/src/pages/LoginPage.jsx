@@ -60,7 +60,8 @@ function LoginPage() {
           </p>
         ) : null}
       </form>
-      <p>zebirita@email.com, $#zebirita#$</p>
+      <p>zebirita@email.com</p>
+      <p>$#zebirita#$</p>
     </div>
   );
 }

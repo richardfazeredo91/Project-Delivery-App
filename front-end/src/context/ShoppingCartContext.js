@@ -4,23 +4,23 @@ import PropTypes from 'prop-types';
 const MyShoppingCartContext = React.createContext();
 
 function ShoppingCartContext({ children }) {
-  const [products, setProducts] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState('0');
 
   useEffect(() => {
-    console.log('entrou no usereffect do context do shopping card', products);
-    const sumAllValueProducts = products.reduce(
+    console.log('entrou no usereffect do context do shopping card', shoppingCart);
+    const sumAllValueProducts = shoppingCart.reduce(
       (totalValue, item) => (Number(item.quantity) * Number(item.price)) + totalValue,
       0,
     ).toFixed(2);
     console.log('sumAllValueProducts---->', sumAllValueProducts);
     setTotalPrice(String(sumAllValueProducts));
-    localStorage.setItem('products', JSON.stringify(products));
-  }, [products]);
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+  }, [shoppingCart]);
 
   const contextValue = {
-    setProducts,
-    products,
+    setShoppingCart,
+    shoppingCart,
     totalPrice,
   };
 
