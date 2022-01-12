@@ -1,20 +1,26 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import LoginPage from './components/LoginPage';
-import AdminPage from './components/AdminPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import CustomerProducts from './pages/CustomerProducts';
 import AppContext from './context/AppContext';
+import ShoppingCartContext from './context/ShoppingCartContext';
 
 
 function App() {
   return (
     <AppContext>
-      <Router>
-        <Routes>
-          <Route path="/login" element={ <LoginPage /> } />
-          <Route path="/" element={ <Navigate replace to="/login" /> } />
-        </Routes>
-      </Router>
+      <ShoppingCartContext>
+        <Router>
+          <Routes>
+            <Route path="/customer/products" element={ <CustomerProducts /> } />
+            <Route path="/login" element={ <LoginPage /> } />
+            <Route path="/register" element={ <RegisterPage /> } />
+            <Route path="/" element={ <Navigate replace to="/login" /> } />
+          </Routes>
+        </Router>
+      </ShoppingCartContext>
     </AppContext>
   );
 }

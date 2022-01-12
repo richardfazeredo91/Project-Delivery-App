@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useAppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 import validateLoginInfo from '../utils/loginUtils/validateLoginInfo';
 import handleLoginButton from '../utils/loginUtils/handleLoginButton';
 
@@ -7,7 +7,7 @@ function LoginPage() {
   const [login, setlogin] = useState('');
   const [password, setpassword] = useState('');
   const [enableButton, setenableButton] = useState(false);
-  const [loginError, setloginError] = useState(true);
+  const [error, setError] = useState(true);
 
   useEffect(() => {
     setenableButton(validateLoginInfo(login, password));
@@ -44,26 +44,23 @@ function LoginPage() {
             type="submit"
             data-testid="common_login__button-login"
             disabled={ !enableButton }
-            onClick={ (e) => setloginError(handleLoginButton(e, login, password)) }
+            onClick={ async (e) => setError(await handleLoginButton(e, login, password)) }
           >
             Login
           </button>
-          <button
-            type="button"
-            data-testid="common_login__button-register"
-          >
-            Ainda não tenho conta
-          </button>
+          <Link to="/register">
+            <button type="button" data-testid="common_login__button-register">
+              Ainda não tenho conta
+            </button>
+          </Link>
         </div>
-        {!loginError ? (
+        {!error ? (
           <p data-testid="common_login__element-invalid-email">
             Login ou senha inválidos
           </p>
         ) : null}
       </form>
-      <p>
-        zebirita@email.com, $#zebirita#$
-      </p>
+      <p>zebirita@email.com, $#zebirita#$</p>
     </div>
   );
 }
