@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useShoppingCartContext } from '../../context/ShoppingCartContext';
 
 function SalesTable({ sales }) {
-  const { totalPrice, setShoppingCart } = useShoppingCartContext();
+  const { setShoppingCart } = useShoppingCartContext();
 
   function subTotal(quantity, price) {
     return (Number(quantity) * Number(price)).toFixed(2);
@@ -45,21 +45,14 @@ function SalesTable({ sales }) {
   }
 
   return (
-    <div>
-      { sales.length ? (
-        <table>
-          <thead>
-            { thMaker() }
-          </thead>
-          <tbody>
-            { sales.map((sale, index) => tdMaker(index, sale)) }
-          </tbody>
-          <p data-testid="customer_checkout__element-order-total-price">
-            {totalPrice.replace(/\./, ',')}
-          </p>
-        </table>
-      ) : <h1>Seu carrinho está vazio!</h1> }
-    </div>
+    <table>
+      <thead>
+        { thMaker() }
+      </thead>
+      <tbody>
+        { sales.map((sale, index) => tdMaker(index, sale)) }
+      </tbody>
+    </table>
   );
 }
 
