@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import { useShoppingCartContext } from '../../context/ShoppingCartContext';
 
 function SalesTable({ sales }) {
-  const { setShoppingCart } = useShoppingCartContext();
+  const { totalPrice, setShoppingCart } = useShoppingCartContext();
 
   function subTotal(quantity, price) {
     return (Number(quantity) * Number(price)).toFixed(2);
   }
 
-  const removeFromCart = (id) => {
-    const newProductList = shoppingCart.filter((product) => product.id !== id);
+  function removeFromCart(id) {
+    const newProductList = sales.filter((product) => product.id !== id);
     setShoppingCart(newProductList);
-  };
+  }
 
-  return (
-    <table>
+  function thMaker() {
+    return (
       <tr>
         <th>Item</th>
         <th>Descrição</th>
@@ -24,21 +24,42 @@ function SalesTable({ sales }) {
         <th>Sub-total</th>
         <th>Remover item</th>
       </tr>
-      {sales.map(({ id, price, name, quantity }, index) => (
-        <tr key={ id }>
-          <td>{index}</td>
-          <td>{name}</td>
-          <td>{quantity}</td>
-          <td>{price}</td>
-          <td>{subTotal(quantity, price)}</td>
-          <td>
-            <button type="button" onClick={ () => removeFromCart(id) }>
-              Remover
-            </button>
-          </td>
-        </tr>
-      ))}
-    </table>
+    );
+  }
+
+  function tdMaker(index, { id, name, quantity, price }) {
+    return (
+      <tr key={ id }>
+        <td>{index}</td>
+        <td>{name}</td>
+        <td>{quantity}</td>
+        <td>{price}</td>
+        <td>{subTotal(quantity, price)}</td>
+        <td>
+          <button type="button" onClick={ () => removeFromCart(id) }>
+            Remover
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
+  return (
+    <div>
+      { sales.length ? (
+        <table>
+          <thead>
+            { thMaker() }
+          </thead>
+          <tbody>
+            { sales.map((sale, index) => tdMaker(index, sale)) }
+          </tbody>
+          <p data-testid="customer_checkout__element-order-total-price">
+            {totalPrice.replace(/\./, ',')}
+          </p>
+        </table>
+      ) : <h1>Seu carrinho está vazio!</h1> }
+    </div>
   );
 }
 
