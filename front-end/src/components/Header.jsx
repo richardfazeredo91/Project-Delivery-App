@@ -22,6 +22,7 @@ function Header() {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-products"
+        onClick={ () => navegate('/customer/products') }
       >
         Produtos
       </button>
