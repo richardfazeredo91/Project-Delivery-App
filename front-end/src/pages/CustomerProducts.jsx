@@ -17,7 +17,7 @@ const CustomerProducts = () => {
       navigate('/');
     }
     getProducts();
-  }, [getProducts]);
+  }, []);
 
   return (
     <>

@@ -12,14 +12,13 @@ function AppContext({ children }) {
 
   const getProducts = async () => {
     const response = await productsGetAll();
-    console.log('products lol');
     setProducts(response);
   };
 
   const getOrders = async (token) => {
-    const response = await getOrdersByUser(token);
-    console.log('lol');
-    setOrders(response);
+    const ordersList = await getOrdersByUser(token);
+    console.log(ordersList);
+    setOrders(ordersList);
   };
 
   const contextValue = {
