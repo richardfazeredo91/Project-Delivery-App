@@ -5,7 +5,7 @@ import CardItem from '../components/CardItem';
 import { useAppContext } from '../context/AppContext';
 import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
-const CustomerProducts = () => {
+function CustomerProducts() {
   const { products, getProducts } = useAppContext();
   const { totalPrice, shoppingCart } = useShoppingCartContext();
   const navigate = useNavigate();
@@ -41,6 +41,6 @@ const CustomerProducts = () => {
       </button>
     </>
   );
-};
+}
 
 export default CustomerProducts;
