@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CustomerProducts from './pages/CustomerProducts';
+import AdminPage from './pages/AdminPage';
 import AppContext from './context/AppContext';
 import ShoppingCartContext from './context/ShoppingCartContext';
-
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
       <ShoppingCartContext>
         <Router>
           <Routes>
+            <Route path="/admin/manage" element={ <AdminPage /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/login" element={ <LoginPage /> } />
             <Route path="/register" element={ <RegisterPage /> } />

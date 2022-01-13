@@ -6,7 +6,11 @@ const handleLoginButton = async (e, email, password) => {
   const response = await loginAttempt(email, password);
   if (response.token) {
     localStorage.setItem('user', JSON.stringify(response));
-    window.location.href = '/customer/products';
+    if (response.role === 'administrator') {
+      window.location.href = '/admin/manage';
+    } else {
+      window.location.href = '/customer/products';
+    }
     return;
   }
   return false;
