@@ -6,7 +6,7 @@ function SalesTable({ sales }) {
   const { setShoppingCart } = useShoppingCartContext();
 
   function subTotal(quantity, price) {
-    return (Number(quantity) * Number(price)).toFixed(2);
+    return (Number(quantity) * Number(price)).toFixed(2).replace(/\./, ',');
   }
 
   function removeFromCart(id) {
@@ -31,18 +31,25 @@ function SalesTable({ sales }) {
     return (
       <tr
         key={ id }
-        data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
       >
-        <td data-testid={ `element-order-table-name-${index}` }>{index}</td>
-        <td data-testid={ `element-order-table-name-${index}` }>{name}</td>
-        <td data-testid={ `element-order-table-quantity-${index}` }>{quantity}</td>
-        <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
-          {price}
+        <td
+          data-testid={ `customer_checkout__element-order-table-item-number-${index}` }
+        >
+          {index + 1}
         </td>
-        <td data-testid={ `element-order-table-sub-total-${index}` }>
+        <td data-testid={ `customer_checkout__element-order-table-name-${index}` }>
+          {name}
+        </td>
+        <td data-testid={ `customer_checkout__element-order-table-quantity-${index}` }>
+          {quantity}
+        </td>
+        <td data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
+          {price.replace(/\./, ',')}
+        </td>
+        <td data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
           {subTotal(quantity, price)}
         </td>
-        <td data-testid={ `element-order-table-remove-${index}` }>
+        <td data-testid={ `customer_checkout__element-order-table-remove-${index}` }>
           <button type="button" onClick={ () => removeFromCart(id) }>
             Remover
           </button>

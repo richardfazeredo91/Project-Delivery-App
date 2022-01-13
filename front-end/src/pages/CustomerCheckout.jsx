@@ -1,4 +1,5 @@
 import React from 'react';
+import AdreessForm from '../components/CustomerCheckout/AdreessForm';
 import SalesTable from '../components/CustomerCheckout/SalesTable';
 import Header from '../components/Header';
 import { useShoppingCartContext } from '../context/ShoppingCartContext';
@@ -18,6 +19,7 @@ function CustomerCheckout() {
           </p>
         </div>
       ) : <h1>Seu carrinho está vazio!</h1>}
+      <AdreessForm />
     </>
   );
 }

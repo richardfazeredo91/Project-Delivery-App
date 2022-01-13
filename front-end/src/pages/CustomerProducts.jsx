@@ -23,12 +23,13 @@ function CustomerProducts() {
     <>
       <Header />
       <button
-        data-testid="customer_products__checkout-bottom-value"
+        style={ { position: 'fixed' } }
+        data-testid="customer_products__button-cart"
         type="button"
         disabled={ !shoppingCart.length }
         onClick={ () => navigate('/customer/checkout') }
       >
-        <p data-testid="customer_products__button-cart">
+        <p data-testid="customer_products__checkout-bottom-value">
           {totalPrice.replace(/\./, ',')}
         </p>
       </button>

@@ -49,6 +49,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt="placeholder"
+        width="100px"
       />
       <div>
         <p data-testid={ `customer_products__element-card-title-${id}` }>

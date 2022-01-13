@@ -33,7 +33,6 @@ beforeEach(async () => {
 describe(requirement(17), () => {
   test("O avaliador testará os data-testids referentes aos itens do carrinho e demais elementos", async () => {
     for (let i = zero; i < itemList.cart.length; i += one) {
-      console.log(page)
       await expect(page).toFindElement(
         customerCheckoutPage.element.orderTable.itemNumber +
           `[data-testid$='-${i}']`
@@ -111,13 +110,13 @@ const validateProductItens = async ({ cart = [], totalPrice }) => {
   return true;
 }
 
-describe.skip(requirement(18), () => {
+describe(requirement(18), () => {
   test("O avaliador testará se os itens contidos na venda correspondem aos itens do checkout", async () => {
     expect(await validateProductItens(itemList)).toBeTruthy();
   });
 });
 
-describe.skip(requirement(19), () => {
+describe(requirement(19), () => {
   test(`O avaliador tentará realizar a remoção de itens validando-os na tabela`, async () => {
     const { productsToExclude, newCart } = cartReduced(itemList);
 

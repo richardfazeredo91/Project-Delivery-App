@@ -1,4 +1,5 @@
 import React from 'react';
+// import { saleAttempt } from '../../server/saleAttempt';
 
 function AdreessForm() {
   // const [seller, setSeller] = useState('');
@@ -6,8 +7,8 @@ function AdreessForm() {
   // const [number, setNumber] = useState(0);
 
   // function optionsSellersMaker() {
-//  colocar função get para pegar os vendedores e fazer um map com a resposta
-//  Colocar função req aqui no na page e passar por parametro
+  //  colocar função get para pegar os vendedores e fazer um map com a resposta
+  //  Colocar função req aqui no na page e passar por parametro
   // }
   return (
     <div>
@@ -47,7 +48,15 @@ function AdreessForm() {
           type="submit"
           data-testid="customer_checkout__button-submit-order"
           // disabled={ !enableButton }
-          onClick={ () => {} }
+          // onClick={ () => {
+          //   saleAttempt(products, {
+          //     sellerName,
+          //     totalPrice,
+          //     deliveryAddress,
+          //     deliveryNumber,
+          //   });
+          //   },
+          // }
           /*  O conteudo dessa req será
           products(array com productId e quantity),sellerName, totalPrice, deliveryAddress,deliveryNumber
           PEgar o id do retorno e redirecionar para proxima tela */
