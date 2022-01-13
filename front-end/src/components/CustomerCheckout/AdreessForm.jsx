@@ -6,7 +6,7 @@ import saleAttempt from '../../server/saleAttempt';
 
 function AdreessForm({ allProducts, totalPrice }) {
   const [seller, setSeller] = useState([]);
-  const [sellerName, setSellerName] = useState('');
+  const [sellerId, setSellerId] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState(0);
 
@@ -24,7 +24,7 @@ function AdreessForm({ allProducts, totalPrice }) {
   async function confirmCheckout(e) {
     e.preventDefault();
     const responseSaleAttempt = await saleAttempt(allProducts, {
-      sellerName,
+      sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
@@ -42,11 +42,11 @@ function AdreessForm({ allProducts, totalPrice }) {
           name="seller"
           id="seller"
           data-testid="customer_checkout__select-seller"
-          onChange={ ({ target }) => setSellerName(target.value) }
+          onChange={ ({ target }) => setSellerId(Number(target.value)) }
         >
-          <option value="">Selecione um nome</option>
-          {seller.length ? seller.map(({ name, id }) => (
-            <option key={ id } value={ name }>{ name }</option>
+          <option value="" selected disabled hidden>Selecione um nome</option>
+          {seller.length ? seller.map(({ name, id }, index) => (
+            <option key={ index } value={ id }>{ name }</option>
           )) : null}
         </select>
 

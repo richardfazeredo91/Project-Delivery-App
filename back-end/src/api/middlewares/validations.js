@@ -38,14 +38,16 @@ const validateNewSale = (req, _res, next) => {
 
   const { error } = joi.object({
     products: joi.array().items(product).min(1).required(),
-    sellerName: joi.string().required(),
+    sellerId: joi.number().required(),
     totalPrice: joi.number().precision(2).required(),
     deliveryAddress: joi.string().required(),
     deliveryNumber: joi.string().required(),
 
   }).validate(body);
 
-  if (error) throw Error('INVALID_FIELDS');
+  if (error) {
+    console.log('error ===> ', error.details[0].message)
+    throw Error('INVALID_FIELDS')};
 
   return next();
 };

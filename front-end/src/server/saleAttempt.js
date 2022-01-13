@@ -1,6 +1,6 @@
 const saleAttempt = async (
   products,
-  { sellerName, totalPrice, deliveryAddress, deliveryNumber },
+  { sellerId, totalPrice, deliveryAddress, deliveryNumber },
 ) => {
   const loginData = fetch('http://localhost:3001/sale', {
     method: 'POST',
@@ -10,7 +10,7 @@ const saleAttempt = async (
     },
     body: JSON.stringify({
       products,
-      sellerName,
+      sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
