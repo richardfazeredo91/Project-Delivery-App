@@ -6,7 +6,7 @@ const saleAttempt = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authentication: localStorage.getItem('user').token,
+      Authorization: JSON.parse(localStorage.getItem('user')).token,
     },
     body: JSON.stringify({
       products,
@@ -22,17 +22,3 @@ const saleAttempt = async (
 };
 
 export default saleAttempt;
-
-/*
-{
-"products":[
-{ "productId": 1, "quantity": 3},
-{ "productId": 4, "quantity": 1},
-{ "productId": 7, "quantity": 5}
-],
-"sellerName": "Fulana Pereira",
-"totalPrice": 28.30,
-"deliveryAddress": "rua paraisopolis",
-"deliveryNumber": "numero 507, apto 102"
-}
-*/

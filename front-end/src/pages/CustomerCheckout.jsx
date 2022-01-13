@@ -18,8 +18,15 @@ function CustomerCheckout() {
             {totalPrice.replace(/\./, ',')}
           </p>
         </div>
-      ) : <h1>Seu carrinho está vazio!</h1>}
-      <AdreessForm />
+      ) : (
+        <h1>Seu carrinho está vazio!</h1>
+      )}
+      <AdreessForm
+        allProducts={ shoppingCart.map(({ id, quantity }) => (
+          { productId: id, quantity }
+        )) }
+        totalPrice={ totalPrice }
+      />
     </>
   );
 }

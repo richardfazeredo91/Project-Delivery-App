@@ -1,29 +1,55 @@
-import React from 'react';
-// import { saleAttempt } from '../../server/saleAttempt';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import getAllSellers from '../../server/getAllSellers';
+import saleAttempt from '../../server/saleAttempt';
 
-function AdreessForm() {
-  // const [seller, setSeller] = useState('');
-  // const [address, setAddress] = useState('');
-  // const [number, setNumber] = useState(0);
+function AdreessForm({ allProducts, totalPrice }) {
+  const [seller, setSeller] = useState([]);
+  const [sellerName, setSellerName] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState(0);
 
-  // function optionsSellersMaker() {
-  //  colocar função get para pegar os vendedores e fazer um map com a resposta
-  //  Colocar função req aqui no na page e passar por parametro
-  // }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getSellersFromApi = async () => {
+      const sellers = await getAllSellers();
+      const sellersNames = sellers.map(({ name, id }) => ({ name, id }));
+      setSeller(sellersNames);
+    };
+    getSellersFromApi();
+  }, []);
+
+  async function confirmCheckout(e) {
+    e.preventDefault();
+    const responseSaleAttempt = await saleAttempt(allProducts, {
+      sellerName,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+    });
+
+    navigate(`/customer/orders/${responseSaleAttempt.id}`);
+  }
+
   return (
     <div>
       <h2>Detalhes e Endereço para Entrega</h2>
       <form>
-        {/* <label htmlFor="seller" /> */}
         P. Vendedora Responsável:
         <select
           name="seller"
           id="seller"
           data-testid="customer_checkout__select-seller"
+          onChange={ ({ target }) => setSellerName(target.value) }
         >
-          <option value="v">vovó</option>
-          <option value="vc">vovô</option>
+          <option value="">Selecione um nome</option>
+          {seller.length ? seller.map(({ name, id }) => (
+            <option key={ id } value={ name }>{ name }</option>
+          )) : null}
         </select>
+
         <label htmlFor="address">
           Endereço
           <input
@@ -31,7 +57,7 @@ function AdreessForm() {
             name="address"
             id="address"
             data-testid="customer_checkout__input-address"
-            onChange={ () => {} }
+            onChange={ ({ target }) => setDeliveryAddress(target.value) }
           />
         </label>
         <label htmlFor="number">
@@ -41,25 +67,13 @@ function AdreessForm() {
             name="number"
             id="number"
             data-testid="customer_checkout__input-addressNumber"
-            onChange={ () => {} }
+            onChange={ ({ target }) => setDeliveryNumber(target.value) }
           />
         </label>
         <button
           type="submit"
           data-testid="customer_checkout__button-submit-order"
-          // disabled={ !enableButton }
-          // onClick={ () => {
-          //   saleAttempt(products, {
-          //     sellerName,
-          //     totalPrice,
-          //     deliveryAddress,
-          //     deliveryNumber,
-          //   });
-          //   },
-          // }
-          /*  O conteudo dessa req será
-          products(array com productId e quantity),sellerName, totalPrice, deliveryAddress,deliveryNumber
-          PEgar o id do retorno e redirecionar para proxima tela */
+          onClick={ (e) => confirmCheckout(e) }
         >
           Finalizar pedido
         </button>
@@ -67,5 +81,10 @@ function AdreessForm() {
     </div>
   );
 }
+
+AdreessForm.propTypes = {
+  allProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalPrice: PropTypes.string.isRequired,
+};
 
 export default AdreessForm;
