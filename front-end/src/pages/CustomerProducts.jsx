@@ -22,6 +22,16 @@ function CustomerProducts() {
   return (
     <>
       <Header />
+      <button
+        data-testid="customer_products__checkout-bottom-value"
+        type="button"
+        disabled={ !shoppingCart.length }
+        onClick={ () => navigate('/customer/checkout') }
+      >
+        <p data-testid="customer_products__button-cart">
+          {totalPrice.replace(/\./, ',')}
+        </p>
+      </button>
       {products.length ? (
         products.map((product) => (
           <CardItem key={ product.id } product={ product } />
@@ -29,16 +39,6 @@ function CustomerProducts() {
       ) : (
         <p>No products</p>
       )}
-      <button
-        data-testid="customer_products__button-cart"
-        type="button"
-        disabled={ !shoppingCart.length }
-        onClick={ () => navigate('/customer/checkout') }
-      >
-        <p data-testid="customer_products__checkout-bottom-value">
-          {totalPrice.replace(/\./, ',')}
-        </p>
-      </button>
     </>
   );
 }
