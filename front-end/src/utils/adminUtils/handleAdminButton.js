@@ -1,16 +1,14 @@
 
 //ALterar tudo aqui
-import registerAttempt from '../../server/registerAttempt';
+import adminRegisterAttempt from '../../server/adminRegisterAttempt';
 
-const handleRegisterButton = async (e, name, email, password) => {
+const handleRegisterButton = async (e, name, email, password, role) => {
   e.preventDefault();
-  const response = await registerAttempt(name, email, password);
+  const response = await adminRegisterAttempt(name, email, password, role);
   if (response.token) {
-    localStorage.setItem('user', response);
-    window.location.href = '/customer/products';
+    console.log(`${response} + TESTE`);
     return;
   }
-  console.log(`${response} + TESTE`);
   return false;
 };
 

@@ -1,5 +1,5 @@
-const registerAttempt = async (name, email, password) => {
-  const loginData = fetch('http://localhost:3001/admin/register ', {
+const adminRegisterAttempt = async (name, email, password) => {
+  const newUserData = fetch('http://localhost:3001/admin/register ', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ const registerAttempt = async (name, email, password) => {
   })
     .then((response) => response.json())
     .then((data) => data);
-  return loginData;
+  return newUserData;
 };
 
-export default registerAttempt;
+export default adminRegisterAttempt;
