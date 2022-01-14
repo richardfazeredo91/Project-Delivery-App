@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function OrderCard({ order: { id, status, saleDate, totalPrice } }) {
+  const { role } = JSON.parse(localStorage.getItem('user'));
+
+  const prefix = {
+    customer: 'customer_orders',
+    seller: 'seller_orders',
+  };
+
   const formatDate = (date) => {
     const n = 10;
     const formatedDate = date.substring(0, n);
@@ -13,16 +20,16 @@ export default function OrderCard({ order: { id, status, saleDate, totalPrice } 
   return (
     <div>
       <Link to={ `customer/orders/${id}` }>
-        <p data-testid={ `customer_orders__element-order-id-${id}` }>
+        <p data-testid={ `${prefix[role]}__element-order-id-${id}` }>
           {id}
         </p>
-        <p data-testid={ `customer_orders__element-delivery-status-${id}` }>
+        <p data-testid={ `${prefix[role]}__element-delivery-status-${id}` }>
           {status}
         </p>
-        <p data-testid={ `customer_orders__element-order-date-${id}` }>
+        <p data-testid={ `${prefix[role]}__element-order-date-${id}` }>
           {formatDate(saleDate)}
         </p>
-        <p>
+        <p data-testid={ `${prefix[role]}__element-card-price-${id}` }>
           {totalPrice.replace(/\./, ',')}
         </p>
       </Link>
