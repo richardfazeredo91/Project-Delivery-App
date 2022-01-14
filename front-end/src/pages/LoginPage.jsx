@@ -71,6 +71,9 @@ function LoginPage() {
       </form>
       <p>zebirita@email.com</p>
       <p>$#zebirita#$</p>
+      <br />
+      <p> adm@deliveryapp.com  </p>
+      <p>--adm2@21!!--</p>
     </div>
   );
 }
