@@ -6,6 +6,7 @@ const handleLoginButton = async (e, email, password, navigate) => {
   const response = await loginAttempt(email, password);
   if (response.token) {
     localStorage.setItem('user', JSON.stringify(response));
+
     navigate(route[response.role]);
     return;
   }
