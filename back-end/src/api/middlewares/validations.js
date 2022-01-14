@@ -46,8 +46,9 @@ const validateNewSale = (req, _res, next) => {
   }).validate(body);
 
   if (error) {
-    console.log('error ===> ', error.details[0].message)
-    throw Error('INVALID_FIELDS')};
+    console.log('error ===> ', error.details[0].message);
+    throw Error('INVALID_FIELDS'); 
+}
 
   return next();
 };

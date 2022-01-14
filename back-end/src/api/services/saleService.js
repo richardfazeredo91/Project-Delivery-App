@@ -1,4 +1,4 @@
-const { Sale, User, SalesProduct, Product } = require('../../database/models');
+const { Sale, SalesProduct, Product } = require('../../database/models');
 
 const createProductSales = async (products, saleId, t) => {
   const salesProductsArray = products.map(({ productId, quantity }) => ({
