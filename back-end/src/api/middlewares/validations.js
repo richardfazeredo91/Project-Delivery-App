@@ -57,7 +57,7 @@ const validateStatus = (req, _res, next) => {
   const { body } = req;
 
   const { error } = joi.object({
-    status: joi.any().valid('preparando', 'em entrega', 'entregue').required(),
+    status: joi.any().valid('Preparando', 'Em Trânsito', 'Entregue').required(),
   }).validate(body);
 
   if (error) throw Error('INVALID_FIELDS');

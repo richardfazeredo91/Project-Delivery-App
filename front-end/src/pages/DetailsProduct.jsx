@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { useAppContext } from '../context/AppContext';
 import getSubtotal from '../utils/detailsProduct';
 import formatDate from '../utils/dateUtils/formatDate';
+import updateStatus from '../server/updateStatus';
 
 const DetailsProduct = () => {
   const { orderDetails, getDetails } = useAppContext();
@@ -105,7 +106,7 @@ const DetailsProduct = () => {
         <button
           data-testid={ `${prefix[role]}__button-delivery-check` }
           type="button"
-          // onClick={ }
+          onClick={ () => updateStatus(id, 'Entregue' )}
           disabled={ orderDetails.status !== 'Em Trânsito' }
         >
           MARCAR COMO ENTREGUE
@@ -116,7 +117,7 @@ const DetailsProduct = () => {
           <button
             data-testid={ `${prefix[role]}__button-preparing-check` }
             type="button"
-            // onClick={ }
+            onClick={ () => updateStatus(id, 'Preparando' )}
             disabled={ orderDetails.status !== 'Pendente' }
           >
             PREPARAR PEDIDO
@@ -124,7 +125,7 @@ const DetailsProduct = () => {
           <button
             data-testid={ `${prefix[role]}__button-dispatch-check` }
             type="button"
-            // onClick={ }
+            onClick={ () => updateStatus(id, 'Em Trânsito' )}
             disabled={ orderDetails.status !== 'Preparando' }
           >
             SAIU PARA ENTREGA
