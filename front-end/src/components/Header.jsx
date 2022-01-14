@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+function Header() {
   const navigate = useNavigate();
 
   const handleExitButton = (e) => {
@@ -22,6 +22,7 @@ const Header = () => {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-products"
+        onClick={ () => navigate('/customer/products') }
       >
         Produtos
       </button>
@@ -44,6 +45,6 @@ const Header = () => {
       </button>
     </div>
   );
-};
+}
 
 export default Header;

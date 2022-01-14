@@ -7,6 +7,7 @@ import CustomerProducts from './pages/CustomerProducts';
 import AppContext from './context/AppContext';
 import ShoppingCartContext from './context/ShoppingCartContext';
 import CustomerOrder from './pages/CustomerOrders';
+import CustomerCheckout from './pages/CustomerCheckout';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/customer/orders" element={ <CustomerOrder /> } />
+            <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/login" element={ <LoginPage /> } />
             <Route path="/register" element={ <RegisterPage /> } />
