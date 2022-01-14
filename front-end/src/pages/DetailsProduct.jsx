@@ -84,11 +84,13 @@ const DetailsProduct = () => {
         Pedido Nº
         { id }
       </p>
-      <p
-        data-testid={ `${prefix[role]}${EL_OR}-details-label-seller-name` }
-      >
-        {orderDetails.sellerName}
-      </p>
+      {(role === 'customer') ? (
+        <p
+          data-testid={ `${prefix[role]}${EL_OR}-details-label-seller-name` }
+        >
+          {orderDetails.sellerName}
+        </p>)
+        : null}
       <p
         data-testid={ `${prefix[role]}${EL_OR}-details-label-order-date` }
       >
@@ -99,14 +101,36 @@ const DetailsProduct = () => {
       >
         {orderDetails.status}
       </p>
-      <button
-        data-testid={ `${prefix[role]}__button-delivery-check` }
-        type="button"
-        // onClick={ }
-        disabled={ orderDetails.status !== 'Em Trânsito' }
-      >
-        MARCAR COMO ENTREGUE
-      </button>
+      {(role === 'customer') ? (
+        <button
+          data-testid={ `${prefix[role]}__button-delivery-check` }
+          type="button"
+          // onClick={ }
+          disabled={ orderDetails.status !== 'Em Trânsito' }
+        >
+          MARCAR COMO ENTREGUE
+        </button>)
+        : null}
+      {(role === 'seller') ? (
+        <>
+          <button
+            data-testid={ `${prefix[role]}__button-preparing-check` }
+            type="button"
+            // onClick={ }
+            disabled={ orderDetails.status !== 'Pendente' }
+          >
+            PREPARAR PEDIDO
+          </button>
+          <button
+            data-testid={ `${prefix[role]}__button-dispatch-check` }
+            type="button"
+            // onClick={ }
+            disabled={ orderDetails.status !== 'Preparando' }
+          >
+            SAIU PARA ENTREGA
+          </button>
+        </>)
+        : null}
     </div>
   );
 
