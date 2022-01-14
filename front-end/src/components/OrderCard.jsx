@@ -21,7 +21,7 @@ export default function OrderCard(
 
   return (
     <div>
-      <Link to={ `customer/orders/${id}` }>
+      <Link to={ `${role}/orders/${id}` }>
         <p data-testid={ `${prefix[role]}__element-order-id-${id}` }>
           {id}
         </p>
