@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import formatDate from '../utils/dateUtils/formatDate';
 
 export default function OrderCard(
   { order: { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber } },
@@ -12,16 +13,9 @@ export default function OrderCard(
     seller: 'seller_orders',
   };
 
-  const formatDate = (date) => {
-    const n = 10;
-    const formatedDate = date.substring(0, n);
-    const dateArr = formatedDate.split('-');
-    return `${dateArr[2]}/${dateArr[1]}/${dateArr[0]}`;
-  };
-
   return (
     <div>
-      <Link to={ `${role}/orders/${id}` }>
+      <Link to={ `${id}` }>
         <p data-testid={ `${prefix[role]}__element-order-id-${id}` }>
           {id}
         </p>

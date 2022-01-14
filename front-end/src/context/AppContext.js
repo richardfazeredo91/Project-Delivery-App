@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import productsGetAll from '../server/productsGetAll';
 import getOrdersByUser from '../server/getOrdersByUser';
+import getOrderDetails from '../server/getOrderDetails';
 
 const UserContext = React.createContext();
 
@@ -9,16 +10,22 @@ function AppContext({ children }) {
   const [user, setUser] = useState({ email: '' });
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [orderDetails, setOrderDetails] = useState(null);
 
   const getProducts = async () => {
     const response = await productsGetAll();
     setProducts(response);
   };
 
-  const getOrders = async (token) => {
-    const ordersList = await getOrdersByUser(token);
-    console.log(ordersList);
+  const getOrders = async () => {
+    const ordersList = await getOrdersByUser();
     setOrders(ordersList);
+  };
+
+  const getDetails = async (id) => {
+    const details = await getOrderDetails(id);
+    console.log(details, 'context');
+    setOrderDetails(details);
   };
 
   const contextValue = {
@@ -28,6 +35,8 @@ function AppContext({ children }) {
     getProducts,
     orders,
     getOrders,
+    orderDetails,
+    getDetails,
   };
 
   return (

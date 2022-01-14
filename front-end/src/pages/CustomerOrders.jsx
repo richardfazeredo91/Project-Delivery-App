@@ -12,7 +12,7 @@ export default function CustomerOrder() {
       localStorage.clear();
       navigate('/');
     }
-    getOrders(user.token);
+    getOrders();
   }, []);
 
   return (

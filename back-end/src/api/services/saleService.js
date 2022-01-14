@@ -1,4 +1,4 @@
-const { Sale, SalesProduct, Product } = require('../../database/models');
+const { Sale, SalesProduct, Product, User } = require('../../database/models');
 
 const createProductSales = async (products, saleId, t) => {
   const salesProductsArray = products.map(({ productId, quantity }) => ({
@@ -42,8 +42,9 @@ const getSalesByUser = async ({ userId, role }) => {
   return sales;
 };
 
-const formatSale = (sale) => ({
+const formatSale = (sale, sellerName) => ({
     ...sale,
+    sellerName,
     products: sale.products.map((item) => ({
       ...item,
       quantity: item.quantity[0].quantity, 
@@ -69,8 +70,10 @@ const getSaleDetails = async ({ userId }, saleId) => {
   if (!sale) throw Error('SALES_NOT_FOUND');
   
   if (sale.userId !== userId && sale.sellerId !== userId) throw Error('ACCESS_DENIED');
+
+  const sellername = await User.findOne({ where: { id: sale.sellerId } });
    
- return formatSale(sale.get({ plain: true }));
+ return formatSale(sale.get({ plain: true }), sellername.name);
 };
 
 const updateStatus = async ({ status }, { userId }, saleId) => {

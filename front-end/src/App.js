@@ -17,7 +17,7 @@ function App() {
       <ShoppingCartContext>
         <Router>
           <Routes>
-            <Route path="/orders/details/:id" element={ <DetailsProduct /> } />
+            <Route path="/customer/orders/:id" element={ <DetailsProduct /> } />
             <Route path="/seller/orders" element={ <CustomerOrder /> } />
             <Route path="/customer/orders" element={ <CustomerOrder /> } />
             <Route path="/customer/checkout" element={ <CustomerCheckout /> } />

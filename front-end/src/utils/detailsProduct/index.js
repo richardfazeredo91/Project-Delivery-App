@@ -1,3 +1,3 @@
-const getSubtotal = (quantity, price) => (quantity * price).toFixed(2);
+const getSubtotal = (quantity, price) => (Number(quantity) * Number(price)).toFixed(2);
 
 export default getSubtotal;
