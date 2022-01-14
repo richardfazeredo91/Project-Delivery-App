@@ -72,6 +72,9 @@ function LoginPage() {
       <p>zebirita@email.com</p>
       <p>$#zebirita#$</p>
       <br />
+      <p>fulana@deliveryapp.com</p>
+      <p>fulana@123</p>
+      <br />
       <p> adm@deliveryapp.com  </p>
       <p>--adm2@21!!--</p>
     </div>

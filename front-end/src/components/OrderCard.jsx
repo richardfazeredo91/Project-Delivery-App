@@ -34,12 +34,10 @@ export default function OrderCard(
         <p data-testid={ `${prefix[role]}__element-card-price-${id}` }>
           {totalPrice.replace(/\./, ',')}
         </p>
-        {(role === 'seller')
-          ? <p
-            data-testid={ `${prefix[role]}__element-card-address-${id}` }
-          >
+        {(role === 'seller') ? (
+          <p data-testid={ `${prefix[role]}__element-card-address-${id}` }>
             {`${deliveryAddress} ${deliveryNumber}`}
-          </p>
+          </p>)
           : null}
       </Link>
     </div>
