@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function OrderCard({ order: { id, status, saleDate, totalPrice } }) {
+export default function OrderCard(
+  { order: { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber } },
+) {
   const { role } = JSON.parse(localStorage.getItem('user'));
 
   const prefix = {
@@ -32,6 +34,13 @@ export default function OrderCard({ order: { id, status, saleDate, totalPrice } 
         <p data-testid={ `${prefix[role]}__element-card-price-${id}` }>
           {totalPrice.replace(/\./, ',')}
         </p>
+        {(role === 'seller')
+          ? <p
+            data-testid={ `${prefix[role]}__element-card-address-${id}` }
+          >
+            {`${deliveryAddress} ${deliveryNumber}`}
+          </p>
+          : null}
       </Link>
     </div>
   );
@@ -43,5 +52,7 @@ OrderCard.propTypes = {
     status: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
     totalPrice: PropTypes.string.isRequired,
+    deliveryAddress: PropTypes.string.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
   }).isRequired,
 };
