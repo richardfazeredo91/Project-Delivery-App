@@ -3,7 +3,8 @@ const SalesProduct = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
   },
   {
-    timeStamps: true,
+    timestamps: false,
+    tableName: 'sales_products',
     underscored: true,
   });
 
@@ -11,14 +12,14 @@ const SalesProduct = (sequelize, DataTypes) => {
     models.Sale.belongsToMany(models.Product, {
       as: 'products',
       through: SalesProduct,
-      foreignKey: 'id',
-      otherKey: 'id',
+      foreignKey: 'saleId',
+      otherKey: 'productId',
     });
     models.Product.belongsToMany(models.Sale, {
       as: 'sales',
       through: SalesProduct,
-      foreignKey: 'id',
-      otherKey: 'id',
+      foreignKey: 'productId',
+      otherKey: 'saleId',
     });
   }
 

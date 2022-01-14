@@ -5,9 +5,14 @@ const Product = (sequelize, DataTypes) => {
     url_image: DataTypes.STRING,
   },
   {
-    timeStamps: false,
-    underscored: true,
+    timestamps: false,
+    tableName: 'products',
   });
+
+  Product.associate = (models) => {
+    Product.hasMany(models.SalesProduct,
+      {foreignKey: 'productId', as: 'quantity'});
+  }
 
   return Product;
 };
