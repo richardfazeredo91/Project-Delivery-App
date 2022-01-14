@@ -1,10 +1,8 @@
-
-//ALterar tudo aqui
 import adminRegisterAttempt from '../../server/adminRegisterAttempt';
 
-const handleRegisterButton = async (e, name, email, password, role) => {
-  e.preventDefault();
+const handleRegisterButton = async (name, email, password, role) => {
   const response = await adminRegisterAttempt(name, email, password, role);
+  console.log(response);
   if (response.token) {
     console.log(`${response} + TESTE`);
     return;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import validateAdminInfo from '../utils/adminUtils/validateAdminInfo';
-
-// name, email, password, role
+import handleAdminButton from '../utils/adminUtils/handleAdminButton';
 
 function AdminPage() {
   const [name, setname] = useState('');
   const [login, setlogin] = useState('');
   const [password, setpassword] = useState('');
+  const [role, setrole] = useState('customer');
   const [enableButton, setenableButton] = useState(false);
   const [error, setError] = useState(true);
 
@@ -54,6 +54,7 @@ function AdminPage() {
             name="newUserRole"
             id="newUserRole"
             data-testid="admin_manage__select-role"
+            onChange={ (e) => setrole(e.target.value) }
           >
             <option value="administrator">Administrador</option>
             <option value="seller">P. Vendedora</option>
@@ -65,7 +66,9 @@ function AdminPage() {
         <button
           type="button"
           disabled={ !enableButton }
-          onClick={ async (e) => setError(await handleLoginButton(e, login, password)) }
+          onClick={
+            async () => setError(await handleAdminButton(name, login, password, role))
+          }
           data-testid="admin_manage__button-register"
         >
           CADASTRAR
