@@ -11,8 +11,6 @@ const DetailsProduct = () => {
   // const [details, setDetails] = useState({});
   const { id } = useParams();
 
-  console.log(id);
-
   const { role } = JSON.parse(localStorage.getItem('user'));
 
   const EL_OR = '__element-order';
@@ -27,11 +25,8 @@ const DetailsProduct = () => {
       localStorage.clear();
       navigate('/');
     }
-    console.log('useeffect');
     getDetails(id);
   }, []);
-
-  console.log(orderDetails, 'page');
 
   const orderDetailsPannel = () => (
     <table>

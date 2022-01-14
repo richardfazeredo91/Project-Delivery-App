@@ -8,7 +8,6 @@ const handleRegisterButton = async (e, name, email, password) => {
     window.location.href = '/customer/products';
     return;
   }
-  console.log(`${response} + TESTE`);
   return false;
 };
 

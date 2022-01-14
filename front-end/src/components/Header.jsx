@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
+  const { role } = JSON.parse(localStorage.getItem('user'));
 
   const handleExitButton = (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ function Header() {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
-        onClick={ () => navigate('/customer/orders') }
+        onClick={ () => navigate(`/${role}/orders`) }
       >
         Meus Pedidos
       </button>

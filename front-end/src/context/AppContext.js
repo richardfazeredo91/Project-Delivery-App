@@ -24,7 +24,6 @@ function AppContext({ children }) {
 
   const getDetails = async (id) => {
     const details = await getOrderDetails(id);
-    console.log(details, 'context');
     setOrderDetails(details);
   };
 

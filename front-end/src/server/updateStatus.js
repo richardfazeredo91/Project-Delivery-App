@@ -1,5 +1,4 @@
 const updateStatus = async (id, status) => {
-  console.log(id);
   const sale = fetch(`http://localhost:3001/sale/status/${id}`, {
     method: 'PUT',
     headers: {
@@ -11,7 +10,6 @@ const updateStatus = async (id, status) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
     .then((data) => data);
   return sale;
 };
