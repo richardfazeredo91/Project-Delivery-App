@@ -1,4 +1,4 @@
-const { Sale, User, SalesProduct, Product } = require('../../database/models');
+const { Sale, SalesProduct, Product } = require('../../database/models');
 
 const createProductSales = async (products, saleId, t) => {
   const salesProductsArray = products.map(({ productId, quantity }) => ({
@@ -10,20 +10,16 @@ const createProductSales = async (products, saleId, t) => {
    await SalesProduct.bulkCreate(salesProductsArray, { transaction: t });
 };
 
-const createSale = async ({ products, sellerName, totalPrice, deliveryAddress, deliveryNumber },
+const createSale = async ({ products, sellerId, totalPrice, deliveryAddress, deliveryNumber },
   { userId }, t) => {
- const seller = await User.findOne({ where: { name: sellerName } });
-
- if (!seller) throw Error('SELLER_NOT_FOUND');
-
  const sale = await Sale.create(
    {
-     sellerId: seller.id,
+     sellerId,
      userId,
      totalPrice,
      deliveryAddress,
      deliveryNumber,
-     status: 'pendente',
+     status: 'Pendente',
    },
    { transaction: t },
  );

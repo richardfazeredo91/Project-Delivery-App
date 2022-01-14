@@ -5,7 +5,7 @@ import CardItem from '../components/CardItem';
 import { useAppContext } from '../context/AppContext';
 import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
-const CustomerProducts = () => {
+function CustomerProducts() {
   const { products, getProducts } = useAppContext();
   const { totalPrice, shoppingCart } = useShoppingCartContext();
   const navigate = useNavigate();
@@ -14,22 +14,16 @@ const CustomerProducts = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user.token) {
       localStorage.clear();
-      window.location.href = '/';
+      navigate('/');
     }
     getProducts();
-  }, [getProducts]);
+  }, []);
 
   return (
     <>
       <Header />
-      {products.length ? (
-        products.map((product) => (
-          <CardItem key={ product.id } product={ product } />
-        ))
-      ) : (
-        <p>No products</p>
-      )}
       <button
+        style={ { position: 'fixed' } }
         data-testid="customer_products__button-cart"
         type="button"
         disabled={ !shoppingCart.length }
@@ -39,8 +33,15 @@ const CustomerProducts = () => {
           {totalPrice.replace(/\./, ',')}
         </p>
       </button>
+      {products.length ? (
+        products.map((product) => (
+          <CardItem key={ product.id } product={ product } />
+        ))
+      ) : (
+        <p>No products</p>
+      )}
     </>
   );
-};
+}
 
 export default CustomerProducts;
