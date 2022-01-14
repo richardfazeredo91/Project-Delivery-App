@@ -1,10 +1,8 @@
-
-
 const Sale = (sequelize, DataTypes) => {
   const Sale = sequelize.define("Sale", {
     userId: DataTypes.INTEGER,
     sellerId: DataTypes.INTEGER,
-    totalPrice: DataTypes.DECIMAL,
+    totalPrice: DataTypes.DECIMAL(10,2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     saleDate: DataTypes.DATE,
@@ -13,7 +11,7 @@ const Sale = (sequelize, DataTypes) => {
   {
     timestamps: false,
     underscored: true,
-    tableName: 'sales',
+    tableName: 'sales', 
   });
 
   Sale.associate = (models) => {

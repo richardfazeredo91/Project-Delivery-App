@@ -2,7 +2,7 @@ const decoder = (error) => {
   const codes = {
   ER_DUP_ENTRY: { status: 409, message: 'Cannot register this email' },
   INVALID_FIELDS: { status: 400, message: 'Invalid fields' },
-  WRONG_CREDENTIALS: { status: 409, message: 'email or password incorrect' },
+  WRONG_CREDENTIALS: { status: 404, message: 'email or password incorrect' },
   USER_NOT_FOUND: { status: 404, message: 'User does not exist' },
   SALES_NOT_FOUND: { status: 404, message: 'Sale(s) not found' },
   MISSING_TOKEN: { status: 401, message: 'Token not found' },

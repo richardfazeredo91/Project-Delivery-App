@@ -1,84 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useShoppingCartContext } from '../context/ShoppingCartContext';
 
 const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
-  const { products, setProducts } = useShoppingCartContext();
+  const { shoppingCart, setShoppingCart } = useShoppingCartContext();
   const [quantity, setQuantity] = useState(0);
+  const [isOnCart, setIsOnCart] = useState(false);
 
-  function handleCardQuantityProducts(e) {
-    let updateProduct;
+  const removeFromCart = () => {
+    const newProductList = shoppingCart.filter((product) => product.id !== id);
+    setShoppingCart(newProductList);
+    setIsOnCart(false);
+  };
 
-    switch (e.target.name) {
-    case 'subtract':
-      console.log('subtract');
-      if (quantity === 0) break;
+  const addToCart = () => {
+    const newProduct = { id, name, quantity, price };
+    setShoppingCart([...shoppingCart, newProduct]);
+    setIsOnCart(true);
+  };
 
-      if (quantity === 1) {
-        setQuantity(quantity - 1);
-        updateProduct = products.filter((product) => product.id !== id);
-        setProducts(updateProduct);
-        break;
-      }
-
-      setQuantity(quantity - 1);
-      updateProduct = products.map((product) => {
-        if (product.id === id) {
-          return { ...product, quantity: product.quantity - 1 };
-        }
-        return product;
-      });
-      setProducts(updateProduct);
-      break;
-    case 'add':
-      console.log('add');
-      if (quantity === 0) {
-        setQuantity(quantity + 1);
-        updateProduct = { id, name, quantity: 1, price };
-        setProducts([...products, updateProduct]);
-        break;
-      }
-
-      updateProduct = products.map((product) => {
-        if (product.id === id) return { ...product, quantity: product.quantity + 1 };
-        return product;
-      });
-      setQuantity((quantity + 1));
-      setProducts(updateProduct);
-      break;
-    default:
-      console.log(`Sorry, we are out of ${e.target.name}.`);
-    }
-  }
-
-  function handleInputQuantity(e) {
-    const inputNumber = Number(e.target.value);
-    let updateProduct;
-
-    if (quantity === 0) {
-      setQuantity(inputNumber);
-      const updatedProduct = { id, name, quantity: inputNumber, price };
-      setProducts([...products, updatedProduct]);
-      return;
-    }
-
-    if (!inputNumber) {
-      setQuantity(inputNumber);
-      updateProduct = products.filter((product) => product.id !== id);
-      setProducts(updateProduct);
-      return;
-    }
-
-    setQuantity(inputNumber);
-    updateProduct = products.map((product) => {
+  const updateQauntity = () => {
+    const newProductList = shoppingCart.map((product) => {
       if (product.id === id) {
-        return { ...product, quantity: inputNumber };
+        return { ...product, quantity };
       }
       return product;
     });
 
-    setProducts(updateProduct);
-  }
+    setShoppingCart(newProductList);
+  };
+
+  const handleShopingCart = () => {
+    if (quantity === 0) removeFromCart();
+    else if (!isOnCart) addToCart();
+    else updateQauntity();
+  };
+
+  useEffect(() => {
+    handleShopingCart();
+  }, [quantity]);
 
   return (
     <div>
@@ -89,6 +49,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt="placeholder"
+        width="100px"
       />
       <div>
         <p data-testid={ `customer_products__element-card-title-${id}` }>
@@ -100,7 +61,7 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
             name="add"
             value="+"
             data-testid={ `customer_products__button-card-add-item-${id}` }
-            onClick={ handleCardQuantityProducts }
+            onClick={ () => setQuantity(quantity + 1) }
           >
             +
           </button>
@@ -108,14 +69,14 @@ const CardItem = ({ product: { id, price, name, url_image: urlImage } }) => {
             data-testid={ `customer_products__input-card-quantity-${id}` }
             value={ quantity }
             type="number"
-            onChange={ handleInputQuantity }
+            onChange={ (e) => setQuantity(e.target.value > 0 ? e.target.value : 0) }
           />
           <button
             type="button"
             name="subtract"
             value="-"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            onClick={ handleCardQuantityProducts }
+            onClick={ () => setQuantity(quantity > 0 ? quantity - 1 : 0) }
           >
             -
           </button>

@@ -1,15 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const handleExitButton = (e) => {
-  e.preventDefault();
-  localStorage.clear();
-  window.location.href = '/';
-};
+function Header() {
+  const navigate = useNavigate();
 
-const Header = () => {
+  const handleExitButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate('/');
+  };
+
   const user = localStorage.getItem('user');
   if (typeof user !== 'string') {
-    window.location.href = '/';
+    navigate('/');
   }
 
   const { name } = JSON.parse(user);
@@ -19,12 +22,14 @@ const Header = () => {
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-products"
+        onClick={ () => navigate('/customer/products') }
       >
         Produtos
       </button>
       <button
         type="button"
         data-testid="customer_products__element-navbar-link-orders"
+        onClick={ () => navigate('/customer/orders') }
       >
         Meus Pedidos
       </button>
@@ -40,6 +45,6 @@ const Header = () => {
       </button>
     </div>
   );
-};
+}
 
 export default Header;

@@ -7,6 +7,9 @@ import CustomerProducts from './pages/CustomerProducts';
 import AdminPage from './pages/AdminPage';
 import AppContext from './context/AppContext';
 import ShoppingCartContext from './context/ShoppingCartContext';
+import CustomerOrder from './pages/CustomerOrders';
+import CustomerCheckout from './pages/CustomerCheckout';
+import PlaceHolder from './pages/PlaceHolder';
 
 function App() {
   return (
@@ -14,6 +17,10 @@ function App() {
       <ShoppingCartContext>
         <Router>
           <Routes>
+            <Route path="/seller/orders" element={ <CustomerOrder /> } />
+            <Route path="/customer/orders/:id" element={ <PlaceHolder /> } />
+            <Route path="/customer/orders" element={ <CustomerOrder /> } />
+            <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/admin/manage" element={ <AdminPage /> } />
             <Route path="/customer/products" element={ <CustomerProducts /> } />
             <Route path="/login" element={ <LoginPage /> } />
