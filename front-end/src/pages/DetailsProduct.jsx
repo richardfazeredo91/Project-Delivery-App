@@ -106,7 +106,7 @@ const DetailsProduct = () => {
         <button
           data-testid={ `${prefix[role]}__button-delivery-check` }
           type="button"
-          onClick={ () => updateStatus(id, 'Entregue' )}
+          onClick={ () => updateStatus(id, 'Entregue') }
           disabled={ orderDetails.status !== 'Em Trânsito' }
         >
           MARCAR COMO ENTREGUE
@@ -117,7 +117,7 @@ const DetailsProduct = () => {
           <button
             data-testid={ `${prefix[role]}__button-preparing-check` }
             type="button"
-            onClick={ () => updateStatus(id, 'Preparando' )}
+            onClick={ () => updateStatus(id, 'Preparando') }
             disabled={ orderDetails.status !== 'Pendente' }
           >
             PREPARAR PEDIDO
@@ -125,7 +125,7 @@ const DetailsProduct = () => {
           <button
             data-testid={ `${prefix[role]}__button-dispatch-check` }
             type="button"
-            onClick={ () => updateStatus(id, 'Em Trânsito' )}
+            onClick={ () => updateStatus(id, 'Em Trânsito') }
             disabled={ orderDetails.status !== 'Preparando' }
           >
             SAIU PARA ENTREGA
