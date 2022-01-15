@@ -8,7 +8,6 @@ import updateStatus from '../server/updateStatus';
 
 const DetailsProduct = () => {
   const { orderDetails, getDetails } = useAppContext();
-  // const [details, setDetails] = useState({});
   const { id } = useParams();
 
   const { role } = JSON.parse(localStorage.getItem('user'));
@@ -101,7 +100,10 @@ const DetailsProduct = () => {
         <button
           data-testid={ `${prefix[role]}__button-delivery-check` }
           type="button"
-          onClick={ () => updateStatus(id, 'Entregue') }
+          onClick={ () => {
+            updateStatus(id, 'Entregue');
+            getDetails(id);
+          } }
           disabled={ orderDetails.status !== 'Em Trânsito' }
         >
           MARCAR COMO ENTREGUE
