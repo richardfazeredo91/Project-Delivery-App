@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CustomerProducts from './pages/CustomerProducts';
+import DetailsProduct from './pages/DetailsProduct';
 import AdminPage from './pages/AdminPage';
 import AppContext from './context/AppContext';
 import ShoppingCartContext from './context/ShoppingCartContext';
 import CustomerOrder from './pages/CustomerOrders';
 import CustomerCheckout from './pages/CustomerCheckout';
-import PlaceHolder from './pages/PlaceHolder';
 
 function App() {
   return (
@@ -17,8 +17,9 @@ function App() {
       <ShoppingCartContext>
         <Router>
           <Routes>
+            <Route path="/seller/orders/:id" element={ <DetailsProduct /> } />
+            <Route path="/customer/orders/:id" element={ <DetailsProduct /> } />
             <Route path="/seller/orders" element={ <CustomerOrder /> } />
-            <Route path="/customer/orders/:id" element={ <PlaceHolder /> } />
             <Route path="/customer/orders" element={ <CustomerOrder /> } />
             <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
             <Route path="/admin/manage" element={ <AdminPage /> } />

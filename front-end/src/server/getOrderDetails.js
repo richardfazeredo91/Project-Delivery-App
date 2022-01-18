@@ -1,5 +1,5 @@
-const getOrdersByUser = () => {
-  const userOrders = fetch('http://localhost:3001/sale', {
+const getOrderDetails = (id) => {
+  const orderDetails = fetch(`http://localhost:3001/sale/details/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -8,7 +8,8 @@ const getOrdersByUser = () => {
   })
     .then((response) => response.json())
     .then((data) => data);
-  return userOrders;
+
+  return orderDetails;
 };
 
-export default getOrdersByUser;
+export default getOrderDetails;
